@@ -52,3 +52,19 @@
   25%, 75% { opacity: 0; }
 }
 
+/* PANELS */
+
+.my-panel {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.my-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+#expand-icon:hover {
+  cursor: pointer;
+}

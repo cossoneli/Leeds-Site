@@ -80,29 +80,38 @@ $countdown = $nowUtc->diff($fixtureUtc);
             <span>Previous Result</span>
         </div>
     </div>
-    <!-- LIVE TABLE POSIITON PANEL -->
+
     <div class="row justify-content-center">
-        <div class="col-3 mx-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
+        <!-- LIVE TABLE POSIITON PANEL -->
+        <div class="my-panel col-3 mx-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
             <div class="my-1 d-flex justify-content-between">
                 <span>Premier League Table</span>
-                <button class="fa fa-expand mt-1" aria-hidden="true"></button>
+                <i id="expand-icon" class="fa fa-expand mt-1" aria-hidden="true"></i>
             </div>
             <?php foreach ($window as $team) {
 
                 if ($team['team']['shortName'] === "Leeds United") {
                     ?>
 
-                    <div class="team my-1 d-flex justify-content-between fw-bold">
-                        <span><?php echo $team['position'] ?></span>
-                        <span><?php echo $team['team']['shortName'] ?></span>
+                    <div class="team my-1 d-flex justify-content-between align-items-center fw-bold">
+                        <div class="d-flex">
+                            <span><?php echo $team['position'] ?></span>
+                            <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
+                                src="<?php echo $team['team']['crest'] ?>" alt="">
+                            <span><?php echo $team['team']['shortName'] ?></span>
+                        </div>
                         <span><?php echo $team['points'] ?></span>
                     </div>
 
                 <?php } else { ?>
 
-                    <div class="team my-1 d-flex justify-content-between">
-                        <span><?php echo $team['position'] ?></span>
-                        <span><?php echo $team['team']['shortName'] ?></span>
+                    <div class="team my-1 d-flex justify-content-between align-items-center">
+                        <div class="d-flex">
+                            <span><?php echo $team['position'] ?></span>
+                            <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
+                                src="<?php echo $team['team']['crest'] ?>" alt="">
+                            <span><?php echo $team['team']['shortName'] ?></span>
+                        </div>
                         <span><?php echo $team['points'] ?></span>
                     </div>
 
@@ -113,7 +122,7 @@ $countdown = $nowUtc->diff($fixtureUtc);
         </div>
         <!-- NEXT FIXTURE PANEL -->
         <div
-            class="col-4 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
+            class="my-panel col-4 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
             <div class="d-flex my-2 justify-content-around">
                 <img style="width: 50px;" src="<?php echo $nextLeedsFixture['homeTeam']['crest'] ?>" alt="">
                 <span><?php echo $nextLeedsFixture['homeTeam']["shortName"] ?> </span>
@@ -132,7 +141,7 @@ $countdown = $nowUtc->diff($fixtureUtc);
         </div>
         <!-- PREVIOUS FIXTURE PANEL -->
         <div
-            class="col-3 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
+            class="my-panel col-3 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
             <span class="mx-auto">FT - Date: <?php echo substr($previousLeedsFixture['utcDate'], 0, 10) ?></span>
             <?php
             $winner = $previousLeedsFixture['score']['winner'];
