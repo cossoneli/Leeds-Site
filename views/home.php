@@ -1,103 +1,205 @@
-<?php
-include('partials/header.php');
-
-?>
-
+<?php include('partials/header.php'); ?>
+<?php include('../includes/api.php'); ?>
 
 <?php
 
-if (isset($_SESSION['loggedin'])) {
-    ?>
-    <div class="alert alert-success alert-dismissable fade show d-flex justify-content-between" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-            <use xlink:href="#check-circle-fill" />
-        </svg>
-        <div>
-            Successfully Logged in!
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php
-    unset($_SESSION['loggedin']);
-} else if (isset($_SESSION['message'])) {
-    ?>
+// ----------------------------------FETCH API FOR CURRENT STANDINGS
 
-        <div class="alert alert-success alert-dismissable fade show d-flex justify-content-between" role="alert">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                <use xlink:href="#check-circle-fill" />
-            </svg>
-            <div>
-                Successfully Logged out!
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+$plStandings = getFootballData("competitions/PL/standings");
 
-        <?php
-        unset($_SESSION['message']);
+$nextLeedsFixture = getFootballData("teams/341/matches?status=SCHEDULED")['matches'][0];  // LUFC ID ---> 341
+
+$previousLeedsFixture = end(getFootballData('teams/341/matches?status=FINISHED')['matches']);
+// $previousLeedsFixture = getFootballData("teams/341/matches?status=FINISHED")['matches'][2];  // TEST
+// echo '<pre>';
+// print_r($data);
+// echo '</pre>';
+
+
+// full table as an array
+$fullStandings = $plStandings["standings"][0]["table"];
+
+// find leeds index
+$leedsIndex = null;
+
+foreach ($fullStandings as $index => $team) {
+    if ($team['team']['shortName'] === "Leeds United") {
+        $leedsIndex = $index;
+        break;
+    }
 }
+
+if ($leedsIndex === null) {
+    echo "leeds not found";
+    exit;
+}
+
+
+// get window around leeds
+$start = max(0, $leedsIndex - 3);
+$end = min(count($fullStandings) - 1, $leedsIndex + 3);
+
+$window = array_slice($fullStandings, $start, $end - $start + 1);
+
 ?>
 
-<h1 class="fw-light text-center mt-3">Hi <?php echo isset($_SESSION["name"]) ? $_SESSION["name"] : ""; ?>, Welcome to LU
-    Americas!</h1>
 
-<section class="main-body my-5">
-    <div id="carouselExampleInterval" class="carousel slide w-25 mx-auto" style="height: 250px;"
-        data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <img src="../public/imgs/lu_americas_1.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="../public/imgs/lu_americas_2.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="../public/imgs/lu_americas_3.png" class="d-block w-100" alt="...">
-            </div>
+<?php
+
+// Current UTC time
+$nowUtc = new DateTime("now", new DateTimeZone("UTC"));
+
+// Fixture UTC time
+$fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC"));
+
+// get the difference
+$countdown = $nowUtc->diff($fixtureUtc);
+
+
+?>
+
+
+<header class="hero-banner text-white text-center">
+    <div class="overlay d-flex flex-column justify-content-center align-items-center">
+        <img src="../public/imgs/leeds-logo.png" alt="Leeds United Logo" class="mb-3 hero-logo">
+        <h1 class="display-5 fw-bold">LU Americas</h1>
+        <p class="lead fst-italic">MOT ALAW</p>
+    </div>
+</header>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-3 m-2 d-flex justify-content-center">
+            <span>Live Table Position</span>
+            <span class="live-dot"></span>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-
-    <div class="about w-75 mx-auto my-5">
-        <p>We're a community of Leeds United supporters across North and South America — united by our love for the
-            club. Whether you're catching matches at dawn, connecting with fellow fans, or flying the white, yellow,
-            and
-            blue wherever you are, this is your home away from Elland Road.
-            <br><br>
-            Join us to stay up to date on watch parties, fan events, and all things Leeds. Marching on together! 💛💙🤍
-        </p>
-    </div>
-
-
-    <div class="join-info w-75 mx-auto my-5">
-        <h2>Join LUA</h2>
-        <div class="card" style="width: 16rem;">
-            <img src="https://lh3.googleusercontent.com/sitesv/AICyYdYBTNeVhpScnpytQyF2ko2LoC1lWqZsqZ9y5YyzRL6Nyg0XESASVJzQzJd3oKRSeK6NSCS9zRTiKm0Pxot9SczDIdsYPAI5rbucHl9C1GKPP4BzKFXArXocHrF6r_A_q-7h4jHiN_AiB0lgFyHhRUibsfp06UEenDia7Dmo0pDd0UoyMEBGh44b=w1280"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Arizona</h5>
-                <p class="card-text"><b>Contact: </b> Ben Johnson</p>
-                <p class="card-text"><b>Meetupts: </b> Pour Decisions, Scottsdale</p>
-                <a href="#" class="btn btn-primary">Join LUA email updates</a>
-            </div>
+        <div class="col-4 mx-2 d-flex justify-content-center">
+            <span>Next Fixture</span>
+        </div>
+        <div class="col-3 mx-2 d-flex justify-content-center">
+            <span>Previous Result</span>
         </div>
     </div>
-</section>
+    <!-- LIVE TABLE POSIITON PANEL -->
+    <div class="row justify-content-center">
+        <div class="col-3 mx-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
+            <div class="my-1 d-flex justify-content-between">
+                <span>Premier League Table</span>
+                <button class="fa fa-expand mt-1" aria-hidden="true"></button>
+            </div>
+            <?php foreach ($window as $team) {
+
+                if ($team['team']['shortName'] === "Leeds United") {
+                    ?>
+
+                    <div class="team my-1 d-flex justify-content-between fw-bold">
+                        <span><?php echo $team['position'] ?></span>
+                        <span><?php echo $team['team']['shortName'] ?></span>
+                        <span><?php echo $team['points'] ?></span>
+                    </div>
+
+                <?php } else { ?>
+
+                    <div class="team my-1 d-flex justify-content-between">
+                        <span><?php echo $team['position'] ?></span>
+                        <span><?php echo $team['team']['shortName'] ?></span>
+                        <span><?php echo $team['points'] ?></span>
+                    </div>
+
+                <?php } ?>
+
+
+            <?php } ?>
+        </div>
+        <!-- NEXT FIXTURE PANEL -->
+        <div
+            class="col-4 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
+            <div class="d-flex my-2 justify-content-around">
+                <img style="width: 50px;" src="<?php echo $nextLeedsFixture['homeTeam']['crest'] ?>" alt="">
+                <span><?php echo $nextLeedsFixture['homeTeam']["shortName"] ?> </span>
+                <span>v.</span>
+                <span> <?php echo $nextLeedsFixture['awayTeam']["shortName"] ?></span>
+                <img style="width: 50px;" src="<?php echo $nextLeedsFixture['awayTeam']['crest'] ?>" alt="">
+            </div>
+            <div class="d-flex justify-content-center">Countdown to kickoff</div>
+            <div class="d-flex justify-content-center fs-4 p-1 m-2">
+                <span class="mx-2"><?php echo $countdown->days ?>D </span>
+                <span class="mx-2"><?php echo $countdown->h ?>H </span>
+                <span class="mx-2"><?php echo $countdown->i ?>M </span>
+                <span class="mx-2"><?php echo $countdown->s ?>S </span>
+            </div>
+            <button type="button" class="btn btn-outline-dark">Pre-Match Chat</button>
+        </div>
+        <!-- PREVIOUS FIXTURE PANEL -->
+        <div
+            class="col-3 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
+            <span class="mx-auto">FT - Date: <?php echo substr($previousLeedsFixture['utcDate'], 0, 10) ?></span>
+            <?php
+            $winner = $previousLeedsFixture['score']['winner'];
+            $isHome = $previousLeedsFixture['homeTeam']['shortName'] === "Leeds United";
+            $isAway = $previousLeedsFixture['awayTeam']['shortName'] === "Leeds United";
+
+            if ($winner === "DRAW") {
+                ?>
+                <div class="d-flex justify-content-center my-2 fs-4"> <?php
+            } else if (($isHome && $winner === "HOME_TEAM") || ($isAway && $winner === "AWAY_TEAM")) {
+                ?>
+                        <div class="d-flex justify-content-center fs-4 my-2 text-success"> <?php
+            } else {
+                ?>
+                            <div class="d-flex justify-content-center fs-4 my-2 text-danger"> <?php
+            }
+
+            ?>
+
+                        <?php
+
+
+                        if ($winner === "DRAW" || !$winner) {
+                            $result = "D";
+                        } else {
+                            // If Leeds is home and won, or away and won
+                            $result = ($isHome && $winner === "HOME_TEAM") || ($isAway && $winner === "AWAY_TEAM") ? "W" : "L";
+                        }
+
+                        echo $result . " " . $previousLeedsFixture['score']['fullTime']['home']
+                            . " - " . $previousLeedsFixture['score']['fullTime']['away'];
+
+
+                        ?>
+                    </div>
+                    <img style="width: 75px; align-self: center;" src="<?php
+                    if ($isHome) {
+                        echo $previousLeedsFixture['awayTeam']['crest'];
+                    } else {
+                        echo $previousLeedsFixture['homeTeam']['crest'];
+                    }
+
+                    ?>
+                     " alt="">
+                    <div class="d-flex justify-content-center my-2 fs-4">
+                        <?php
+                        if ($isHome) {
+                            echo 'v. ' . $previousLeedsFixture['awayTeam']['shortName'];
+                        } else {
+                            echo '@ ' . $previousLeedsFixture['homeTeam']['shortName'];
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-9 m-2 d-flex mx-auto justify-content-center">
+                    Latest News
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-9 m-2 d-flex mx-auto justify-content-center border border-dark rounded bg-light">
+                    <span>Latest News Here</span>
+                </div>
+            </div>
+        </div>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+        <?php include('partials/footer.php'); ?>

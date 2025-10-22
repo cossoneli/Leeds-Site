@@ -7,6 +7,8 @@
     <title>LU Americas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/home.css">
+    <link rel="stylesheet" href="../views/styles/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -27,7 +29,7 @@
                         <a class="nav-link" href="#">Newsletter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">LUA Festival</a>
+                        <a class="nav-link" href="groups.php">Groups</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -42,6 +44,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="faq.php" class="nav-link">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.php" class="nav-link">About Us</a>
                     </li>
                     <?php
                     session_start();

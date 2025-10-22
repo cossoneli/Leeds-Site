@@ -1,0 +1,54 @@
+.hero-banner {
+  position: relative;
+  background: url('../../public/imgs/elland-road.jpeg') center/cover no-repeat;
+  height: 320px;
+}
+
+.hero-banner .overlay {
+  background: rgba(0, 28, 78, 0.65); /* Leeds blue overlay */
+  width: 100%;
+  height: 100%;
+}
+
+.hero-logo {
+  width: 100px;
+  height: auto;
+}
+
+@media (max-width: 576px) {
+  .hero-banner {
+    height: 250px;
+  }
+  .hero-logo {
+    width: 70px;
+  }
+  .hero-banner h1 {
+    font-size: 1.75rem;
+  }
+  .hero-banner p {
+    font-size: 1rem;
+  }
+}
+
+/* LIVE BUTTON BLINKING */
+
+.live-dot {
+  margin-top: 4px;
+  margin-left: 3px;
+  display: inline-block;
+  align-self: center;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 5px;
+
+  /* Animation */
+  animation: blink 3s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
