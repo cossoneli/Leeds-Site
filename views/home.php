@@ -1,5 +1,6 @@
 <?php include('partials/header.php'); ?>
 <?php include('../includes/api.php'); ?>
+<?php include('../helpers/table_helper.php'); ?>
 
 <?php
 
@@ -67,7 +68,11 @@ $countdown = $nowUtc->diff($fixtureUtc);
     </div>
 </header>
 
-<div class="container my-5">
+<div class="container mt-3 text-center fs-6 fst-italic">
+    Tip - Click any panel to go to said chat ( MOT )
+</div>
+
+<div class="container my-3">
     <div class="row justify-content-center">
         <div class="col-3 m-2 d-flex justify-content-center">
             <span>Live Table Position</span>
@@ -83,12 +88,26 @@ $countdown = $nowUtc->diff($fixtureUtc);
 
     <div class="row justify-content-center">
         <!-- LIVE TABLE POSIITON PANEL -->
-        <div class="my-panel col-3 mx-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
-            <div class="my-1 d-flex justify-content-between">
+        <div data-topic="Live Table"
+            class="my-panel col-3 mx-2 p-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
+            <div class="my-1 border-bottom d-flex justify-content-between">
                 <span>Premier League Table</span>
                 <i id="expand-icon" class="fa fa-expand mt-1" aria-hidden="true"></i>
             </div>
             <?php foreach ($window as $team) {
+
+                if ($team["position"] === 18) { ?>
+                    <div id="rel-team" class="team my-1 d-flex justify-content-between align-items-center">
+                        <div class="d-flex">
+                            <span><?php echo $team['position'] ?></span>
+                            <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
+                                src="<?php echo $team['team']['crest'] ?>" alt="">
+                            <span><?php echo $team['team']['shortName'] ?></span>
+                        </div>
+                        <span><?php echo $team['points'] ?></span>
+                    </div>
+                    <?php continue;
+                }
 
                 if ($team['team']['shortName'] === "Leeds United") {
                     ?>
@@ -121,13 +140,25 @@ $countdown = $nowUtc->diff($fixtureUtc);
             <?php } ?>
         </div>
         <!-- NEXT FIXTURE PANEL -->
-        <div
+        <div data-topic="Next Fixture"
             class="my-panel col-4 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
             <div class="d-flex my-2 justify-content-around">
                 <img style="width: 50px;" src="<?php echo $nextLeedsFixture['homeTeam']['crest'] ?>" alt="">
-                <span><?php echo $nextLeedsFixture['homeTeam']["shortName"] ?> </span>
+                <div class="d-flex flex-column">
+                    <span><?php echo $nextLeedsFixture['homeTeam']["shortName"] ?> </span>
+                    <span style="font-size: 12px;" class="fst-italic text-muted">(
+                        <?php echo getTeamPosition($fullStandings, $nextLeedsFixture['homeTeam']['shortName']) ?>th in
+                        PL
+                        )</span>
+                </div>
                 <span>v.</span>
-                <span> <?php echo $nextLeedsFixture['awayTeam']["shortName"] ?></span>
+                <div class="d-flex flex-column">
+                    <span><?php echo $nextLeedsFixture['awayTeam']["shortName"] ?> </span>
+                    <span style="font-size: 12px;" class="fst-italic text-muted">(
+                        <?php echo getTeamPosition($fullStandings, $nextLeedsFixture['awayTeam']['shortName']) ?>th in
+                        PL
+                        )</span>
+                </div>
                 <img style="width: 50px;" src="<?php echo $nextLeedsFixture['awayTeam']['crest'] ?>" alt="">
             </div>
             <div class="d-flex justify-content-center">Countdown to kickoff</div>
@@ -137,10 +168,9 @@ $countdown = $nowUtc->diff($fixtureUtc);
                 <span class="mx-2"><?php echo $countdown->i ?>M </span>
                 <span class="mx-2"><?php echo $countdown->s ?>S </span>
             </div>
-            <button type="button" class="btn btn-outline-dark">Pre-Match Chat</button>
         </div>
         <!-- PREVIOUS FIXTURE PANEL -->
-        <div
+        <div data-topic="Previous Fixture"
             class="my-panel col-3 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
             <span class="mx-auto">FT - Date: <?php echo substr($previousLeedsFixture['utcDate'], 0, 10) ?></span>
             <?php

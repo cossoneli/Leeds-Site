@@ -63,8 +63,15 @@
 .my-panel:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
 #expand-icon:hover {
   cursor: pointer;
+}
+
+/*  Table Styles */
+
+#rel-team {
+  border-top: 2px dotted red;
 }
