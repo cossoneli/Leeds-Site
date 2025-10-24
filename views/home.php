@@ -46,15 +46,10 @@ $window = array_slice($fullStandings, $start, $end - $start + 1);
 
 
 <?php
-
-// Current UTC time
-$nowUtc = new DateTime("now", new DateTimeZone("UTC"));
-
 // Fixture UTC time
 $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC"));
 
-// get the difference
-$countdown = $nowUtc->diff($fixtureUtc);
+
 
 
 ?>
@@ -87,7 +82,9 @@ $countdown = $nowUtc->diff($fixtureUtc);
     </div>
 
     <div class="row justify-content-center">
-        <!-- LIVE TABLE POSIITON PANEL -->
+
+        <!------------------------------------------- LIVE TABLE POSIITON PANEL -->
+
         <div data-topic="Live Table"
             class="my-panel col-3 mx-2 p-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
             <div class="my-1 border-bottom d-flex justify-content-between">
@@ -139,7 +136,10 @@ $countdown = $nowUtc->diff($fixtureUtc);
 
             <?php } ?>
         </div>
-        <!-- NEXT FIXTURE PANEL -->
+        <!-- ------------------------------------------------------------------------------------ -->
+
+
+        <!----------------------------------------- NEXT FIXTURE PANEL -->
         <div data-topic="Next Fixture"
             class="my-panel col-4 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
             <div class="d-flex my-2 justify-content-around">
@@ -162,14 +162,13 @@ $countdown = $nowUtc->diff($fixtureUtc);
                 <img style="width: 50px;" src="<?php echo $nextLeedsFixture['awayTeam']['crest'] ?>" alt="">
             </div>
             <div class="d-flex justify-content-center">Countdown to kickoff</div>
-            <div class="d-flex justify-content-center fs-4 p-1 m-2">
-                <span class="mx-2"><?php echo $countdown->days ?>D </span>
-                <span class="mx-2"><?php echo $countdown->h ?>H </span>
-                <span class="mx-2"><?php echo $countdown->i ?>M </span>
-                <span class="mx-2"><?php echo $countdown->s ?>S </span>
+            <div class="countdown d-flex justify-content-center fs-4 p-1 m-2">
+
             </div>
         </div>
-        <!-- PREVIOUS FIXTURE PANEL -->
+        <!-- ------------------------------------------------------------------------------------------- -->
+
+        <!---------------------------------------------- PREVIOUS FIXTURE PANEL -->
         <div data-topic="Previous Fixture"
             class="my-panel col-3 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
             <span class="mx-auto">FT - Date: <?php echo substr($previousLeedsFixture['utcDate'], 0, 10) ?></span>
@@ -239,6 +238,8 @@ $countdown = $nowUtc->diff($fixtureUtc);
             </div>
         </div>
 
-
+        <script>
+            window.fixtureDate = new Date(<?php echo json_encode($fixtureUtc->format(DateTime::ATOM)); ?>);
+        </script>
 
         <?php include('partials/footer.php'); ?>
