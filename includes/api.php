@@ -13,5 +13,12 @@ function getFootballData($endpoint)
     $response = curl_exec($ch);
     curl_close($ch);
 
-    return json_decode($response, true);
+    $response = json_decode($response, true);
+
+    if (isset($response["errorCode"])) {
+        include "error.php";
+        exit;
+    }
+
+    return $response;
 }

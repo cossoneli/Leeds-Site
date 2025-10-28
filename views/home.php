@@ -4,6 +4,9 @@
 
 <?php
 
+// ---------------------------------ALERTS FOR AUTH 
+
+
 // ----------------------------------FETCH API FOR CURRENT STANDINGS
 
 $plStandings = getFootballData("competitions/PL/standings");
@@ -49,9 +52,6 @@ $window = array_slice($fullStandings, $start, $end - $start + 1);
 // Fixture UTC time
 $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC"));
 
-
-
-
 ?>
 
 
@@ -68,6 +68,8 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
 </div>
 
 <div class="container my-3">
+    <!-- -----------------------------------PANEL HEADINGS  -->
+
     <div class="row justify-content-center">
         <div class="col-3 m-2 d-flex justify-content-center">
             <span>Live Table Position</span>
@@ -226,19 +228,10 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                     </div>
                 </div>
             </div>
-            <div class="row my-3">
-                <div class="col-9 m-2 d-flex mx-auto justify-content-center">
-                    Latest News
-                </div>
-            </div>
-            <div class="row my-2">
-                <div class="col-9 m-2 d-flex mx-auto justify-content-center border border-dark rounded bg-light">
-                    <span>Latest News Here</span>
-                </div>
-            </div>
         </div>
 
         <script>
+            // creates a fixtureDate attribute on the window object
             window.fixtureDate = new Date(<?php echo json_encode($fixtureUtc->format(DateTime::ATOM)); ?>);
         </script>
 

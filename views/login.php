@@ -3,8 +3,8 @@
 <div class="container my-5">
     <form action="../controllers/login_validate.php" method="POST">
         <div class="mb-3">
-            <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" name="first_name" id="first_name">
+            <label for="user_name" class="form-label">Username</label>
+            <input type="text" class="form-control" name="user_name" id="user_name">
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>

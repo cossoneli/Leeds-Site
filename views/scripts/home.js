@@ -26,15 +26,17 @@ $(document).ready(() => {
             return;
         }
 
+        const days = Math.floor((diff / (1000 * 60 * 60 * 24)));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
 
         $(".countdown").html(
             `
-            <span class="mx-2 countdown-days">${hours} H</span>
-            <span class="mx-2 countdown-hours">${minutes} M</span>
-            <span class="mx-2 countdown-minutes">${seconds} S</span>
+            <span class="px-2 border-bottom countdown-days">${days} D</span>
+            <span class="px-2 border-bottom countdown-hours">${hours} H</span>
+            <span class="px-2 border-bottom countdown-minutes">${minutes} M</span>
+            <span class="px-2 border-bottom countdown-seconds">${seconds} S</span>
             `
         );
     }
