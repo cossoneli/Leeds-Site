@@ -1,6 +1,10 @@
-<?php include('partials/header.php'); ?>
-<?php include('../includes/api.php'); ?>
-<?php include('../helpers/table_helper.php'); ?>
+<?php
+include('partials/header.php');
+// include('../includes/api.php');
+include('../helpers/table_helper.php');
+include('../controllers/insert_data.php');
+?>
+
 
 <?php
 
