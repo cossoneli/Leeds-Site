@@ -4,7 +4,6 @@
 define("HOSTNAME", "localhost");
 define("USERNAME", "root");
 define("PASSWORD", "");
-// define("DATABASE", "thread_comments");
 define("DATABASE", "leeds_site");
 
 $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);

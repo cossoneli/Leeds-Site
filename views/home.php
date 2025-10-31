@@ -1,8 +1,9 @@
 <?php
 include('partials/header.php');
-// include('../includes/api.php');
+include('../includes/getTable.php');
 include('../helpers/table_helper.php');
 include('../controllers/insert_data.php');
+include('../models/api_model.php');
 ?>
 
 
@@ -13,16 +14,19 @@ include('../controllers/insert_data.php');
 
 // ----------------------------------FETCH API FOR CURRENT STANDINGS
 
+// TODO ---------------->  replace all $plStandings data with $table from database.
+
+$table = getTable($connection);
+
+echo '<pre>';
+print_r($table);
+echo '</pre>';
+
 $plStandings = getFootballData("competitions/PL/standings");
 
 $nextLeedsFixture = getFootballData("teams/341/matches?status=SCHEDULED")['matches'][0];  // LUFC ID ---> 341
 
 $previousLeedsFixture = end(getFootballData('teams/341/matches?status=FINISHED')['matches']);
-// $previousLeedsFixture = getFootballData("teams/341/matches?status=FINISHED")['matches'][2];  // TEST
-// echo '<pre>';
-// print_r($data);
-// echo '</pre>';
-
 
 // full table as an array
 $fullStandings = $plStandings["standings"][0]["table"];

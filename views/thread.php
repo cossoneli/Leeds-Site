@@ -3,8 +3,16 @@ include('partials/header.php');
 include('../models/thread_model.php');
 include('../helpers/thread_helpers.php');
 include('../includes/api.php');
+include('../includes/getTable.php');
 
 //----------------------------------------FETCH APIS FOR DATA
+
+$table = getTable($connection);
+
+echo '<pre>';
+print_r($table);
+echo '</pre>';
+
 
 try {
     $plStandings = getFootballData("competitions/PL/standings");
@@ -38,7 +46,7 @@ $result = mysqli_query($connection, $query);
 if (!$result)
     die(mysqli_error($connection));
 
-?>
+// ?>
 <div class="bg-light text-dark py-4 mb-4 border-bottom shadow-sm">
     <div class="container text-center">
         <h2 class="mb-1 fw-semibold"><?php echo htmlspecialchars($topic); ?></h2>
