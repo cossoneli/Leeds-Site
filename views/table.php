@@ -1,7 +1,7 @@
 <?php
 include('partials/header.php');
-include('../models/api_model.php');
-include('../includes/getTable.php');
+include('../models/api_connection.php');
+include('../helpers/table_helper.php');
 
 $table = getTable($connection);
 
@@ -13,7 +13,7 @@ $table = getTable($connection);
 ?>
 
 <div class="container">
-    <div class="col-md-5">
+    <div class="col-md-5 mx-auto my-3">
         <div class="card shadow-sm border-0 p-3">
             <div class="row">
                 <div class="col-10 mx-auto fw-bold">Premier League Full Table</div>

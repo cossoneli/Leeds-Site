@@ -1,41 +1,27 @@
 <?php
+
+include("../models/api_connection.php");
+include("../includes/api.php");
 include('partials/header.php');
-include('../includes/getTable.php');
 include('../helpers/table_helper.php');
-include('../controllers/insert_data.php');
-include('../models/api_model.php');
-?>
-
-
-<?php
-
-// ---------------------------------ALERTS FOR AUTH 
-
+include('../models/table_model.php');
 
 // ----------------------------------FETCH API FOR CURRENT STANDINGS
 
-// TODO ---------------->  replace all $plStandings data with $table from database.
+$table = getTable(connection: $connection);
 
-$table = getTable($connection);
-
-echo '<pre>';
-print_r($table);
-echo '</pre>';
-
-$plStandings = getFootballData("competitions/PL/standings");
+// TODO eventually need to get rid of all getFootballData() calls
 
 $nextLeedsFixture = getFootballData("teams/341/matches?status=SCHEDULED")['matches'][0];  // LUFC ID ---> 341
 
 $previousLeedsFixture = end(getFootballData('teams/341/matches?status=FINISHED')['matches']);
 
-// full table as an array
-$fullStandings = $plStandings["standings"][0]["table"];
 
 // find leeds index
 $leedsIndex = null;
 
-foreach ($fullStandings as $index => $team) {
-    if ($team['team']['shortName'] === "Leeds United") {
+foreach ($table as $index => $team) {
+    if ($team['abr'] === "LEE") {
         $leedsIndex = $index;
         break;
     }
@@ -49,14 +35,10 @@ if ($leedsIndex === null) {
 
 // get window around leeds
 $start = max(0, $leedsIndex - 3);
-$end = min(count($fullStandings) - 1, $leedsIndex + 3);
+$end = min(count($table) - 1, $leedsIndex + 3);
 
-$window = array_slice($fullStandings, $start, $end - $start + 1);
+$window = array_slice($table, $start, $end - $start + 1);
 
-?>
-
-
-<?php
 // Fixture UTC time
 $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC"));
 
@@ -102,29 +84,29 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                 <i id="expand-icon" class="fa fa-expand mt-1" aria-hidden="true"></i>
             </div>
             <?php foreach ($window as $team) {
-
-                if ($team["position"] === 18) { ?>
-                    <div id="rel-team" class="team my-1 d-flex justify-content-between align-items-center">
+                if ($team["position"] === "18") { ?>
+                    <div id="rel-team"
+                        class="team my-1 d-flex justify-content-between align-items-center border-top border-danger">
                         <div class="d-flex">
                             <span><?php echo $team['position'] ?></span>
                             <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
-                                src="<?php echo $team['team']['crest'] ?>" alt="">
-                            <span><?php echo $team['team']['shortName'] ?></span>
+                                src="<?php echo $team['crest'] ?>" alt="">
+                            <span><?php echo $team['abr'] ?></span>
                         </div>
                         <span><?php echo $team['points'] ?></span>
                     </div>
                     <?php continue;
                 }
 
-                if ($team['team']['shortName'] === "Leeds United") {
+                if ($team['abr'] === "LEE") {
                     ?>
 
                     <div class="team my-1 d-flex justify-content-between align-items-center fw-bold">
                         <div class="d-flex">
                             <span><?php echo $team['position'] ?></span>
                             <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
-                                src="<?php echo $team['team']['crest'] ?>" alt="">
-                            <span><?php echo $team['team']['shortName'] ?></span>
+                                src="<?php echo $team['crest'] ?>" alt="">
+                            <span><?php echo $team['abr'] ?></span>
                         </div>
                         <span><?php echo $team['points'] ?></span>
                     </div>
@@ -135,8 +117,8 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                         <div class="d-flex">
                             <span><?php echo $team['position'] ?></span>
                             <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
-                                src="<?php echo $team['team']['crest'] ?>" alt="">
-                            <span><?php echo $team['team']['shortName'] ?></span>
+                                src="<?php echo $team['crest'] ?>" alt="">
+                            <span><?php echo $team['abr'] ?></span>
                         </div>
                         <span><?php echo $team['points'] ?></span>
                     </div>
@@ -157,7 +139,7 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                 <div class="d-flex flex-column">
                     <span><?php echo $nextLeedsFixture['homeTeam']["shortName"] ?> </span>
                     <span style="font-size: 12px;" class="fst-italic text-muted">(
-                        <?php echo getTeamPosition($fullStandings, $nextLeedsFixture['homeTeam']['shortName']) ?>th in
+                        <?php echo getTeamPosition($table, $nextLeedsFixture['homeTeam']['tla']) ?>th in
                         PL
                         )</span>
                 </div>
@@ -165,7 +147,7 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                 <div class="d-flex flex-column">
                     <span><?php echo $nextLeedsFixture['awayTeam']["shortName"] ?> </span>
                     <span style="font-size: 12px;" class="fst-italic text-muted">(
-                        <?php echo getTeamPosition($fullStandings, $nextLeedsFixture['awayTeam']['shortName']) ?>th in
+                        <?php echo getTeamPosition($table, $nextLeedsFixture['awayTeam']['tla']) ?>th in
                         PL
                         )</span>
                 </div>
@@ -197,9 +179,7 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                 ?>
                             <div class="d-flex justify-content-center fs-4 my-2 text-danger"> <?php
             }
-
             ?>
-
                         <?php
 
 
