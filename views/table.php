@@ -3,6 +3,8 @@ include('partials/header.php');
 include('../models/api_connection.php');
 include('../helpers/table_helper.php');
 
+include('scripts/seed_data.php');
+
 $table = getTable($connection);
 
 

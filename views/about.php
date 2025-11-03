@@ -37,8 +37,7 @@ if (isset($_SESSION['loggedin'])) {
 }
 ?>
 
-<h1 class="fw-light text-center mt-3">Hi <?php echo isset($_SESSION["name"]) ? $_SESSION["name"] : ""; ?>, Welcome to LU
-    Americas!</h1>
+<h1 class="fw-light text-center mt-3">Welcome to LU Americas!</h1>
 
 <section class="main-body my-5">
     <div id="carouselExampleInterval" class="carousel slide w-25 mx-auto" style="height: 250px;"

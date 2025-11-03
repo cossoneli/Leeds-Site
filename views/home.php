@@ -16,7 +16,6 @@ $nextLeedsFixture = getFootballData("teams/341/matches?status=SCHEDULED")['match
 
 $previousLeedsFixture = end(getFootballData('teams/341/matches?status=FINISHED')['matches']);
 
-
 // find leeds index
 $leedsIndex = null;
 
@@ -79,9 +78,8 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
 
         <div data-topic="Live Table"
             class="my-panel col-3 mx-2 p-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
-            <div class="my-1 border-bottom d-flex justify-content-between">
+            <div class="border-bottom d-flex">
                 <span>Premier League Table</span>
-                <i id="expand-icon" class="fa fa-expand mt-1" aria-hidden="true"></i>
             </div>
             <?php foreach ($window as $team) {
                 if ($team["position"] === "18") { ?>

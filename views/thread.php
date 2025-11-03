@@ -1,17 +1,13 @@
 <?php
 include('partials/header.php');
-include('../models/thread_model.php');
 include('../helpers/thread_helpers.php');
+include('../models/api_connection.php');
 include('../includes/api.php');
-include('../includes/getTable.php');
+include('../helpers/table_helper.php');
 
 //----------------------------------------FETCH APIS FOR DATA
 
 $table = getTable($connection);
-
-echo '<pre>';
-print_r($table);
-echo '</pre>';
 
 
 try {
@@ -39,7 +35,7 @@ try {
 
 $topic = $_GET['topic'] ?? 'Discussion Thread';
 
-$query = "select * from `table_comments` ORDER BY created_at DESC";
+$query = "select * from `thread_comments` ORDER BY created_at DESC";
 
 $result = mysqli_query($connection, $query);
 
