@@ -47,7 +47,7 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
 <header class="hero-banner text-white text-center">
     <div class="overlay d-flex flex-column justify-content-center align-items-center">
         <img src="../public/imgs/leeds-logo.png" alt="Leeds United Logo" class="mb-3 hero-logo">
-        <h1 class="display-5 fw-bold">LU Americas</h1>
+        <h1 class="display-5 fw-bold">American Leeds</h1>
         <p class="lead fst-italic">MOT ALAW</p>
     </div>
 </header>
@@ -56,169 +56,112 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
     Tip - Click any panel to go to said chat ( MOT )
 </div>
 
-<div class="container my-3">
-    <!-- -----------------------------------PANEL HEADINGS  -->
+<div class="container my-4">
 
-    <div class="row justify-content-center">
-        <div class="col-3 m-2 d-flex justify-content-center">
-            <span>Live Table Position</span>
-            <span class="live-dot"></span>
+    <!-- PANEL HEADINGS -->
+    <div class="row justify-content-center text-center mb-3">
+        <div class="col-3 d-flex justify-content-center align-items-center">
+            <span class="me-2 fw-semibold">Live Table</span>
+            <span class="live-dot bg-danger rounded-circle" style="width:10px;height:10px;display:inline-block;"></span>
         </div>
-        <div class="col-4 mx-2 d-flex justify-content-center">
-            <span>Next Fixture</span>
-        </div>
-        <div class="col-3 mx-2 d-flex justify-content-center">
-            <span>Previous Result</span>
-        </div>
+        <div class="col-4 fw-semibold">Next Fixture</div>
+        <div class="col-3 fw-semibold">Previous Result</div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center g-3">
 
-        <!------------------------------------------- LIVE TABLE POSIITON PANEL -->
-
-        <div data-topic="Live Table"
-            class="my-panel col-3 mx-2 p-2 d-flex align-content-center flex-column border border-dark rounded bg-light">
-            <div class="border-bottom d-flex">
-                <span>Premier League Table</span>
-            </div>
-            <?php foreach ($window as $team) {
-                if ($team["position"] === "18") { ?>
-                    <div id="rel-team"
-                        class="team my-1 d-flex justify-content-between align-items-center border-top border-danger">
-                        <div class="d-flex">
-                            <span><?php echo $team['position'] ?></span>
-                            <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
-                                src="<?php echo $team['crest'] ?>" alt="">
-                            <span><?php echo $team['abr'] ?></span>
-                        </div>
-                        <span><?php echo $team['points'] ?></span>
+        <!-- LIVE TABLE PANEL -->
+        <div data-topic="Live Table" class="my-panel col-3 p-3 border rounded shadow-sm bg-light">
+            <h6 class="border-bottom pb-2 mb-3 text-center">Premier League Table</h6>
+            <?php foreach ($window as $team):
+                $isLeeds = $team['abr'] === "LEE";
+                $isRel = $team['position'] === "18";
+                $rowClass = $isLeeds ? 'fw-bold bg-white bg-opacity-25' : ($isRel ? 'border-top border-danger' : '');
+                ?>
+                <div
+                    class="d-flex justify-content-between align-items-center py-1 px-2 mb-1 rounded <?php echo $rowClass; ?>">
+                    <div class="d-flex align-items-center">
+                        <span class="me-2"><?php echo $team['position']; ?></span>
+                        <img src="<?php echo $team['crest']; ?>" alt="" style="width:24px;height:24px;" class="me-2">
+                        <span><?php echo $team['abr']; ?></span>
                     </div>
-                    <?php continue;
-                }
-
-                if ($team['abr'] === "LEE") {
-                    ?>
-
-                    <div class="team my-1 d-flex justify-content-between align-items-center fw-bold">
-                        <div class="d-flex">
-                            <span><?php echo $team['position'] ?></span>
-                            <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
-                                src="<?php echo $team['crest'] ?>" alt="">
-                            <span><?php echo $team['abr'] ?></span>
-                        </div>
-                        <span><?php echo $team['points'] ?></span>
-                    </div>
-
-                <?php } else { ?>
-
-                    <div class="team my-1 d-flex justify-content-between align-items-center">
-                        <div class="d-flex">
-                            <span><?php echo $team['position'] ?></span>
-                            <img style="width: 20px; height: 20px;" class="mx-2 align-self-end"
-                                src="<?php echo $team['crest'] ?>" alt="">
-                            <span><?php echo $team['abr'] ?></span>
-                        </div>
-                        <span><?php echo $team['points'] ?></span>
-                    </div>
-
-                <?php } ?>
-
-
-            <?php } ?>
+                    <span class="fw-semibold"><?php echo $team['points']; ?></span>
+                </div>
+            <?php endforeach; ?>
         </div>
-        <!-- ------------------------------------------------------------------------------------ -->
 
-
-        <!----------------------------------------- NEXT FIXTURE PANEL -->
+        <!-- NEXT FIXTURE PANEL -->
         <div data-topic="Next Fixture"
-            class="my-panel col-4 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
-            <div class="d-flex my-2 justify-content-around">
-                <img style="width: 50px;" src="<?php echo $nextLeedsFixture['homeTeam']['crest'] ?>" alt="">
-                <div class="d-flex flex-column">
-                    <span><?php echo $nextLeedsFixture['homeTeam']["shortName"] ?> </span>
-                    <span style="font-size: 12px;" class="fst-italic text-muted">(
-                        <?php echo getTeamPosition($table, $nextLeedsFixture['homeTeam']['tla']) ?>th in
-                        PL
-                        )</span>
+            class="my-panel d-flex flex-column justify-content-center col-4 p-3 border rounded shadow-sm bg-light text-center">
+            <div class="d-flex justify-content-around align-items-center mb-2">
+                <div class="text-center">
+                    <img src="<?php echo $nextLeedsFixture['homeTeam']['crest']; ?>" alt="" style="width:50px;"
+                        class="mb-1">
+                    <div><?php echo $nextLeedsFixture['homeTeam']['shortName']; ?></div>
+                    <small
+                        class="text-muted">(<?php echo getTeamPosition($table, $nextLeedsFixture['homeTeam']['tla']); ?>th)</small>
                 </div>
-                <span>v.</span>
-                <div class="d-flex flex-column">
-                    <span><?php echo $nextLeedsFixture['awayTeam']["shortName"] ?> </span>
-                    <span style="font-size: 12px;" class="fst-italic text-muted">(
-                        <?php echo getTeamPosition($table, $nextLeedsFixture['awayTeam']['tla']) ?>th in
-                        PL
-                        )</span>
+                <span class="fs-5 fw-bold">v</span>
+                <div class="text-center">
+                    <img src="<?php echo $nextLeedsFixture['awayTeam']['crest']; ?>" alt="" style="width:50px;"
+                        class="mb-1">
+                    <div><?php echo $nextLeedsFixture['awayTeam']['shortName']; ?></div>
+                    <small
+                        class="text-muted">(<?php echo getTeamPosition($table, $nextLeedsFixture['awayTeam']['tla']); ?>th)</small>
                 </div>
-                <img style="width: 50px;" src="<?php echo $nextLeedsFixture['awayTeam']['crest'] ?>" alt="">
             </div>
-            <div class="d-flex justify-content-center">Countdown to kickoff</div>
-            <div class="countdown d-flex justify-content-center fs-4 p-1 m-2">
-
-            </div>
+            <div class="my-2">Countdown to kickoff</div>
+            <div class="countdown fs-4 fw-semibold"></div>
         </div>
-        <!-- ------------------------------------------------------------------------------------------- -->
 
-        <!---------------------------------------------- PREVIOUS FIXTURE PANEL -->
+        <!-- PREVIOUS RESULT PANEL -->
         <div data-topic="Previous Fixture"
-            class="my-panel col-3 mx-2 d-flex align-content-center justify-content-center flex-column border border-dark rounded bg-light">
-            <span class="mx-auto">FT - Date: <?php echo substr($previousLeedsFixture['utcDate'], 0, 10) ?></span>
+            class="my-panel d-flex justify-content-center flex-column col-3 p-3 border rounded shadow-sm bg-light text-center">
+            <span class="fw-semibold mb-2 d-block">FT -
+                <?php echo substr($previousLeedsFixture['utcDate'], 0, 10); ?></span>
+
             <?php
             $winner = $previousLeedsFixture['score']['winner'];
             $isHome = $previousLeedsFixture['homeTeam']['shortName'] === "Leeds United";
             $isAway = $previousLeedsFixture['awayTeam']['shortName'] === "Leeds United";
 
-            if ($winner === "DRAW") {
-                ?>
-                <div class="d-flex justify-content-center my-2 fs-4"> <?php
-            } else if (($isHome && $winner === "HOME_TEAM") || ($isAway && $winner === "AWAY_TEAM")) {
-                ?>
-                        <div class="d-flex justify-content-center fs-4 my-2 text-success"> <?php
+            // Determine result class
+            if ($winner === "DRAW" || !$winner) {
+                $resultClass = "text-secondary";
+                $result = "D";
+            } elseif (($isHome && $winner === "HOME_TEAM") || ($isAway && $winner === "AWAY_TEAM")) {
+                $resultClass = "text-success";
+                $result = "W";
             } else {
-                ?>
-                            <div class="d-flex justify-content-center fs-4 my-2 text-danger"> <?php
+                $resultClass = "text-danger";
+                $result = "L";
             }
+
+            $homeScore = $previousLeedsFixture['score']['fullTime']['home'];
+            $awayScore = $previousLeedsFixture['score']['fullTime']['away'];
+            $opponentCrest = $isHome ? $previousLeedsFixture['awayTeam']['crest'] : $previousLeedsFixture['homeTeam']['crest'];
+            $opponentName = $isHome ? $previousLeedsFixture['awayTeam']['shortName'] : $previousLeedsFixture['homeTeam']['shortName'];
+            $venue = $isHome ? 'v.' : '@';
             ?>
-                        <?php
 
+            <div class="fs-4 fw-bold my-2 <?php echo $resultClass; ?>">
+                <?php echo "$result $homeScore - $awayScore"; ?>
+            </div>
 
-                        if ($winner === "DRAW" || !$winner) {
-                            $result = "D";
-                        } else {
-                            // If Leeds is home and won, or away and won
-                            $result = ($isHome && $winner === "HOME_TEAM") || ($isAway && $winner === "AWAY_TEAM") ? "W" : "L";
-                        }
+            <img src="<?php echo $opponentCrest; ?>" alt="" class="mx-auto mb-2" style="width:75px; border-radius:8px;">
 
-                        echo $result . " " . $previousLeedsFixture['score']['fullTime']['home']
-                            . " - " . $previousLeedsFixture['score']['fullTime']['away'];
-
-
-                        ?>
-                    </div>
-                    <img style="width: 75px; align-self: center;" src="<?php
-                    if ($isHome) {
-                        echo $previousLeedsFixture['awayTeam']['crest'];
-                    } else {
-                        echo $previousLeedsFixture['homeTeam']['crest'];
-                    }
-
-                    ?>
-                     " alt="">
-                    <div class="d-flex justify-content-center my-2 fs-4">
-                        <?php
-                        if ($isHome) {
-                            echo 'v. ' . $previousLeedsFixture['awayTeam']['shortName'];
-                        } else {
-                            echo '@ ' . $previousLeedsFixture['homeTeam']['shortName'];
-                        }
-                        ?>
-                    </div>
-                </div>
+            <div class="fs-5 fw-semibold">
+                <?php echo "$venue $opponentName"; ?>
             </div>
         </div>
 
-        <script>
-            // creates a fixtureDate attribute on the window object
-            window.fixtureDate = new Date(<?php echo json_encode($fixtureUtc->format(DateTime::ATOM)); ?>);
-        </script>
+    </div>
+</div>
 
-        <?php include('partials/footer.php'); ?>
+
+<script>
+    // creates a fixtureDate attribute on the window object
+    window.fixtureDate = new Date(<?php echo json_encode($fixtureUtc->format(DateTime::ATOM)); ?>);
+</script>
+
+<?php include('partials/footer.php'); ?>

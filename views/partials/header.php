@@ -14,15 +14,21 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container-fluid">
-            <img class="mx-3" style="width:50px; height: auto;" src="../public/imgs/lu_americas_logo.png" alt="">
+            <a class="navbar-brand d-flex align-items-center" href="home.php">
+                <span class="fw-bold text-black">Leeds United</span>
+            </a>
+
+            <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" href="home.php">Home</a>
                     </li>
@@ -33,10 +39,10 @@
                         <a class="nav-link" href="groups.php">Groups</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="faq.php">FAQ</a>
+                        <a class="nav-link" href="about.php">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">About</a>
+                        <a class="nav-link" href="faq.php">FAQ</a>
                     </li>
                 </ul>
 
@@ -45,18 +51,19 @@
                     session_start();
                     if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
-                            <a href="../controllers/logout.php" class="nav-link">Logout</a>
+                            <a href="../controllers/logout.php"
+                                class="nav-link btn btn-outline-danger rounded-pill px-3 ms-2">Logout</a>
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.php">Log in</a>
+                            <a class="nav-link btn btn-outline-primary rounded-pill px-3 ms-2" href="login.php">Log in</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.php">Sign up</a>
+                            <a class="nav-link btn btn-primary rounded-pill px-3 ms-2 text-white" href="login.php">Sign
+                                up</a>
                         </li>
                     <?php } ?>
                 </ul>
             </div>
-
         </div>
     </nav>

@@ -35,7 +35,22 @@ try {
 
 $topic = $_GET['topic'] ?? 'Discussion Thread';
 
-$query = "select * from `thread_comments` ORDER BY created_at DESC";
+$thread_id = 1;
+switch ($topic) {
+    case 'Live Table':
+        $thread_id = 1;
+        break;
+    case 'Next Fixture':
+        $thread_id = 2;
+        break;
+    case 'Previous Fixture':
+        $thread_id = 3;
+        break;
+    default:
+        $thread_id = 1;
+}
+
+$query = "SELECT * FROM `thread_comments` WHERE thread_id = $thread_id ORDER BY created_at DESC";
 
 $result = mysqli_query($connection, $query);
 
@@ -80,7 +95,9 @@ if (isset($_SESSION["loggedin"])) {
     <div class="row">
         <!-- Left column: Comments -->
         <div class="col-md-7 d-flex flex-column">
-            <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+            <?php
+
+            while ($row = mysqli_fetch_assoc($result)) { ?>
                 <div class="card mb-3 shadow-sm border-0">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -95,7 +112,7 @@ if (isset($_SESSION["loggedin"])) {
                             </span>
                         </div>
                         <p class="card-text text-dark mb-0">
-                            <?php echo nl2br(htmlspecialchars($row['comment'])); ?>
+                            <?php echo nl2br(htmlspecialchars($row['text'])); ?>
                         </p>
                     </div>
                 </div>
