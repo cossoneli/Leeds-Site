@@ -4,17 +4,16 @@ include("../models/api_connection.php");
 include("../includes/api.php");
 include('partials/header.php');
 include('../helpers/table_helper.php');
+include('../helpers/fixtures_helper.php');
 include('../models/table_model.php');
 
-// ----------------------------------FETCH API FOR CURRENT STANDINGS
+// ----------------------------------FETCH DATABASE FOR TABLE AND FIXTURES
 
 $table = getTable(connection: $connection);
-
-// TODO eventually need to get rid of all getFootballData() calls
-
-$nextLeedsFixture = getFootballData("teams/341/matches?status=SCHEDULED")['matches'][0];  // LUFC ID ---> 341
-
-$previousLeedsFixture = end(getFootballData('teams/341/matches?status=FINISHED')['matches']);
+$playedFixtures = getPlayedFixtures($connection);
+$scheduledFixtures = getScheduledFixtures($connection);
+$nextLeedsFixture = $scheduledFixtures[0];
+$previousLeedsFixture = end($playedFixtures);
 
 // find leeds index
 $leedsIndex = null;
@@ -39,7 +38,7 @@ $end = min(count($table) - 1, $leedsIndex + 3);
 $window = array_slice($table, $start, $end - $start + 1);
 
 // Fixture UTC time
-$fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC"));
+$fixtureUtc = new DateTime($nextLeedsFixture['date'], new DateTimeZone("UTC"));
 
 ?>
 
@@ -95,19 +94,17 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
             class="my-panel d-flex flex-column justify-content-center col-4 p-3 border rounded shadow-sm bg-light text-center">
             <div class="d-flex justify-content-around align-items-center mb-2">
                 <div class="text-center">
-                    <img src="<?php echo $nextLeedsFixture['homeTeam']['crest']; ?>" alt="" style="width:50px;"
-                        class="mb-1">
-                    <div><?php echo $nextLeedsFixture['homeTeam']['shortName']; ?></div>
+                    <img src="<?php echo $nextLeedsFixture['home_crest']; ?>" alt="" style="width:50px;" class="mb-1">
+                    <div><?php echo $nextLeedsFixture['home_name']; ?></div>
                     <small
-                        class="text-muted">(<?php echo getTeamPosition($table, $nextLeedsFixture['homeTeam']['tla']); ?>th)</small>
+                        class="text-muted">(<?php echo getTeamPosition($table, $nextLeedsFixture['home_name']); ?>th)</small>
                 </div>
                 <span class="fs-5 fw-bold">v</span>
                 <div class="text-center">
-                    <img src="<?php echo $nextLeedsFixture['awayTeam']['crest']; ?>" alt="" style="width:50px;"
-                        class="mb-1">
-                    <div><?php echo $nextLeedsFixture['awayTeam']['shortName']; ?></div>
+                    <img src="<?php echo $nextLeedsFixture['away_crest']; ?>" alt="" style="width:50px;" class="mb-1">
+                    <div><?php echo $nextLeedsFixture['away_name']; ?></div>
                     <small
-                        class="text-muted">(<?php echo getTeamPosition($table, $nextLeedsFixture['awayTeam']['tla']); ?>th)</small>
+                        class="text-muted">(<?php echo getTeamPosition($table, $nextLeedsFixture['away_name']); ?>th)</small>
                 </div>
             </div>
             <div class="my-2">Countdown to kickoff</div>
@@ -118,12 +115,12 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
         <div data-topic="Previous Fixture"
             class="my-panel d-flex justify-content-center flex-column col-3 p-3 border rounded shadow-sm bg-light text-center">
             <span class="fw-semibold mb-2 d-block">FT -
-                <?php echo substr($previousLeedsFixture['utcDate'], 0, 10); ?></span>
+                <?php echo $previousLeedsFixture['date']; ?></span>
 
             <?php
-            $winner = $previousLeedsFixture['score']['winner'];
-            $isHome = $previousLeedsFixture['homeTeam']['shortName'] === "Leeds United";
-            $isAway = $previousLeedsFixture['awayTeam']['shortName'] === "Leeds United";
+            $winner = getWinner($previousLeedsFixture['home_score'], $previousLeedsFixture['away_score']);
+            $isHome = $previousLeedsFixture['home_name'] === "Leeds United";
+            $isAway = $previousLeedsFixture['away_name'] === "Leeds United";
 
             // Determine result class
             if ($winner === "DRAW" || !$winner) {
@@ -137,10 +134,10 @@ $fixtureUtc = new DateTime($nextLeedsFixture['utcDate'], new DateTimeZone("UTC")
                 $result = "L";
             }
 
-            $homeScore = $previousLeedsFixture['score']['fullTime']['home'];
-            $awayScore = $previousLeedsFixture['score']['fullTime']['away'];
-            $opponentCrest = $isHome ? $previousLeedsFixture['awayTeam']['crest'] : $previousLeedsFixture['homeTeam']['crest'];
-            $opponentName = $isHome ? $previousLeedsFixture['awayTeam']['shortName'] : $previousLeedsFixture['homeTeam']['shortName'];
+            $homeScore = $previousLeedsFixture['home_score'];
+            $awayScore = $previousLeedsFixture['away_score'];
+            $opponentCrest = $isHome ? $previousLeedsFixture['away_crest'] : $previousLeedsFixture['home_crest'];
+            $opponentName = $isHome ? $previousLeedsFixture['away_name'] : $previousLeedsFixture['home_name'];
             $venue = $isHome ? 'v.' : '@';
             ?>
 

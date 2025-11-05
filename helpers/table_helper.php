@@ -3,7 +3,7 @@
 function getTeamPosition(array $table, string $teamName)
 {
     foreach ($table as $position => $teamData) {
-        if (strcasecmp($teamData['abr'], $teamName) === 0) {
+        if (strcasecmp($teamData['team_name'], $teamName) === 0) {
             return $position + 1;
         }
     }
@@ -12,7 +12,7 @@ function getTeamPosition(array $table, string $teamName)
 
 function getTable($connection)
 {
-    $stmt = "SELECT t.crest, t.abr, s.position, s.wins, s.draws, s.losses, s.goal_differential, s.points
+    $stmt = "SELECT t.crest, t.abr, s.position, s.team_name, s.wins, s.draws, s.losses, s.goal_differential, s.points
                                 FROM prem_table s
                                 JOIN team t ON s.team_id = t.id
                                 ORDER BY s.position ASC

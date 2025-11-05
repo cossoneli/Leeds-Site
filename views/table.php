@@ -1,14 +1,10 @@
 <?php
 include('partials/header.php');
 include('../helpers/table_helper.php');
-include('scripts/seed_data.php');
+include("../models/api_connection.php");
+
 
 $table = getTable($connection);
-
-
-// echo '<pre>';
-// print_r($table);
-// echo '</pre>';
 
 ?>
 
