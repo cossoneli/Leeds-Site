@@ -3,41 +3,16 @@ include('partials/header.php');
 ?>
 
 <section class="hero text-center py-5 bg-light">
-    <h1 class="fw-bold text-primary mb-3">Welcome to American Leeds!</h1>
+    <h1 class="fw-bold text-muted mb-3">Welcome to American Leeds!</h1>
     <p class="lead text-dark w-75 mx-auto">
         Connecting Leeds United supporters across North and South America. Share the passion, cheer for every goal,
         and unite with fellow fans no matter where you are!
     </p>
-
-    <!-- Carousel -->
-    <div id="carouselExampleInterval" class="carousel slide mt-4 w-75 mx-auto rounded shadow" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <img src="../public/imgs/lu_americas_1.png" class="d-block w-100 rounded" alt="LU Fans">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="../public/imgs/lu_americas_2.png" class="d-block w-100 rounded" alt="LU Events">
-            </div>
-            <div class="carousel-item">
-                <img src="../public/imgs/lu_americas_3.png" class="d-block w-100 rounded" alt="LU Community">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
 </section>
 
 <section class="about py-5 bg-white">
     <div class="container">
-        <h2 class="text-center fw-bold mb-4 text-primary">Who We Are</h2>
+        <h2 class="text-center fw-bold mb-4 text-muted">Who We Are</h2>
         <p class="text-center w-75 mx-auto mb-5">
             American Leeds is a community of Leeds United supporters across the Americas. Whether it's
             early-morning
@@ -84,7 +59,7 @@ include('partials/header.php');
 
 <section class="cta py-5 bg-light">
     <div class="container text-center">
-        <h2 class="fw-bold mb-3">Marching On Together!</h2>
+        <h2 class="fw-bold text-muted mb-3">Marching On Together!</h2>
         <p class="mb-4 w-75 mx-auto">No matter where you are in the Americas, American Leeds brings Leeds United
             supporters
             together.

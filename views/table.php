@@ -6,6 +6,11 @@ include("../models/api_connection.php");
 
 $table = getTable($connection);
 
+
+// echo '<pre>';
+// print_r($table);
+// echo '</pre>';
+
 ?>
 
 <div class="container">
@@ -28,11 +33,11 @@ $table = getTable($connection);
                 <?php foreach ($table as $team) { ?>
                     <?php
                     $borderClass = "";
-                    if ($team['position'] === 5)
+                    if ($team['position'] === '5')
                         $borderClass = "border-top border-success";
-                    else if ($team['position'] === 6)
+                    else if ($team['position'] === '6')
                         $borderClass = "border-top border-info";
-                    else if ($team['position'] === 18)
+                    else if ($team['position'] === '18')
                         $borderClass = "border-top border-danger";
                     ?>
                     <div class="row my-1 <?php echo $borderClass; ?>">

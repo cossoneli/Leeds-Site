@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="home.php">
-                <span class="fw-bold text-black">Leeds United</span>
+                <span class="fw-bold text-muted">Leeds United</span>
             </a>
 
             <!-- Toggler -->
@@ -51,19 +51,27 @@
                     session_start();
                     if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
-                            <a href="../controllers/logout.php"
-                                class="nav-link btn btn-outline-danger rounded-pill px-3 ms-2">Logout</a>
+                            <a href="../controllers/logout.php" class="nav-link btn rounded-pill px-3 ms-2"
+                                style="background-color: #1D428A; color: #FFCD00; border: 2px solid #FFCD00;">
+                                Logout
+                            </a>
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary rounded-pill px-3 ms-2" href="login.php">Log in</a>
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="login.php"
+                                style="background-color: white; color: #1D428A; border: 2px solid #1D428A;">
+                                Log in
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary rounded-pill px-3 ms-2 text-white" href="login.php">Sign
-                                up</a>
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="login.php"
+                                style="background-color: #FFCD00; color: #1D428A; border: 2px solid #1D428A;">
+                                Sign up
+                            </a>
                         </li>
                     <?php } ?>
                 </ul>
+
             </div>
         </div>
     </nav>

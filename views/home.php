@@ -51,7 +51,7 @@ $fixtureUtc = new DateTime($nextLeedsFixture['date'], new DateTimeZone("UTC"));
     </div>
 </header>
 
-<div class="container mt-3 text-center fs-6 fst-italic">
+<div class="container my-3 py-1 text-center fs-6 fst-italic border-bottom">
     Tip - Click any panel to go to said chat ( MOT )
 </div>
 
