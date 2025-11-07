@@ -1,6 +1,6 @@
 <?php
 
-include("../models/api_connection.php");
+include("../models/db_connection.php");
 include("../includes/api.php");
 include('partials/header.php');
 include('../helpers/table_helper.php');

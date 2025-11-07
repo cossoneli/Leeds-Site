@@ -1,11 +1,25 @@
 <?php
 
-session_start();
+require('../models/db_connection.php');
 
-if (isset($_POST["logged_in"])) {
-    $_SESSION["username"] = $_POST["user_name"];
-    $_SESSION["loggedin"] = "loggin";
-    $_SESSION["reject_message"] = null;
-    header("location:../views/home.php");
-    exit();
+$email = trim($_POST['email']);
+$password = trim($_POST['password']);
+
+$stmt = $connection->prepare("SELECT id, username, email, password FROM user WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+
+$stmt->bind_result($id, $username, $email, $hashedPassword);
+$stmt->fetch();
+
+if ($id) {
+    if (password_verify($password, $hashedPassword)) {
+        session_start();
+        $_SESSION['username'] = $username;
+        header('location:../views/home.php');
+    } else {
+        header('location:../views/signup.php');
+    }
+} else {
+    echo "Invalid username or password.";
 }

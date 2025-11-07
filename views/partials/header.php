@@ -64,7 +64,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 ms-2" href="login.php"
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="signup.php"
                                 style="background-color: #FFCD00; color: #1D428A; border: 2px solid #1D428A;">
                                 Sign up
                             </a>

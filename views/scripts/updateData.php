@@ -3,7 +3,7 @@
 // this is a cron job
 
 include __DIR__ . "/../../includes/api.php";
-include __DIR__ . "/../../models/api_connection.php";
+include __DIR__ . "/../../models/db_connection.php";
 include __DIR__ . "/../../models/table_model.php";
 include __DIR__ . "/../../models/team_model.php";
 

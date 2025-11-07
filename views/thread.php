@@ -1,34 +1,18 @@
 <?php
 include('partials/header.php');
 include('../helpers/thread_helpers.php');
-include('../models/api_connection.php');
+include('../models/db_connection.php');
 include('../includes/api.php');
 include('../helpers/table_helper.php');
+include('../helpers/fixtures_helper.php');
 
 //----------------------------------------FETCH APIS FOR DATA
 
 $table = getTable($connection);
-
-
-try {
-    $plStandings = getFootballData("competitions/PL/standings");
-
-    if (isset($plStandings["standings"][0]["table"])) {
-        $fullStandings = $plStandings["standings"][0]["table"];
-    }
-
-    $matches = getFootballData('teams/341/matches?status=FINISHED');
-    if (!$matches || empty($matches['matches'])) {
-        throw new Exception("No recent matches found");
-    }
-
-    $previousLeedsFixtureID = end($matches['matches'])['id'];
-    $previousLeedsFixture = getFootballData('matches/' . $previousLeedsFixtureID);
-
-} catch (Exception $e) {
-    include('../includes/error.php');
-    exit;
-}
+$playedFixtures = getPlayedFixtures($connection);
+$scheduledFixtures = getScheduledFixtures($connection);
+$nextLeedsFixture = $scheduledFixtures[0];
+$previousLeedsFixture = end($playedFixtures);
 
 // ------------------------------------------------------------
 
@@ -166,7 +150,7 @@ if (isset($_SESSION["loggedin"])) {
                 <?php if ($_GET['topic'] === "Previous Fixture") { ?>
                     <div class="row">
                         <div style="font-size: 14px;" class="col-4 mx-auto text-center">
-                            <?php echo $previousLeedsFixture['competition']['name'] ?>
+                            <?php echo "Premier League" ?>
                         </div>
                     </div>
                     <div class="row">
@@ -175,17 +159,14 @@ if (isset($_SESSION["loggedin"])) {
                         </div>
                     </div>
                     <div class="row d-flex justify-content-between mx-1">
-                        <img style="width: 120px;" src="<?php echo $previousLeedsFixture['homeTeam']['crest'] ?>" alt="">
-                        <img style="width: 120px;" src="<?php echo $previousLeedsFixture['competition']['emblem'] ?>"
-                            alt="">
-                        <img style="width: 120px;" src="<?php echo $previousLeedsFixture['awayTeam']['crest'] ?>" alt="">
+                        <img style="width: 120px;" src="<?php echo $previousLeedsFixture['home_crest'] ?>" alt="">
+                        <img style="width: 120px;" src="https://crests.football-data.org/PL.png" alt="">
+                        <img style="width: 120px;" src="<?php echo $previousLeedsFixture['away_crest'] ?>" alt="">
                     </div>
                     <div class="row my-2 d-flex justify-content-between">
-                        <span
-                            class="col-4 fs-2 text-center"><?php echo $previousLeedsFixture['score']['fullTime']['home'] ?></span>
+                        <span class="col-4 fs-2 text-center"><?php echo $previousLeedsFixture['home_score'] ?></span>
                         <span class="col-4 fw-bold text-center">FT</span>
-                        <span
-                            class="col-4 fs-2 text-center"><?php echo $previousLeedsFixture['score']['fullTime']['away'] ?></span>
+                        <span class="col-4 fs-2 text-center"><?php echo $previousLeedsFixture['away_score'] ?></span>
                     </div>
                 <?php } ?>
 

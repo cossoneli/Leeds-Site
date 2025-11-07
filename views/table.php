@@ -1,7 +1,7 @@
 <?php
 include('partials/header.php');
 include('../helpers/table_helper.php');
-include("../models/api_connection.php");
+include("../models/db_connection.php");
 
 
 $table = getTable($connection);
