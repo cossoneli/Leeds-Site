@@ -6,12 +6,12 @@
         <div class="mb-3">
             <label for="email" class="form-label" style="color:#1D428A;">Email address</label>
             <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-                style="border: 2px solid #1D428A; border-radius: 25px;">
+                style="border: 2px solid #1D428A; border-radius: 25px;" required>
         </div>
         <div class="mb-4">
             <label for="password" class="form-label" style="color:#1D428A;">Password</label>
             <input type="password" class="form-control" name="password" id="password"
-                style="border: 2px solid #1D428A; border-radius: 25px;">
+                style="border: 2px solid #1D428A; border-radius: 25px;" required>
         </div>
         <button type="submit" name="logged_in" class="btn btn-primary w-100 rounded-pill"
             style="background-color:#FFCD00; color:#1D428A; border: 2px solid #1D428A; font-weight:bold;">

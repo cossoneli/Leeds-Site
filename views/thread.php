@@ -79,28 +79,47 @@ if (isset($_SESSION["loggedin"])) {
     <div class="row">
         <!-- Left column: Comments -->
         <div class="col-md-7 d-flex flex-column">
-            <?php
-
-            while ($row = mysqli_fetch_assoc($result)) { ?>
-                <div class="card mb-3 shadow-sm border-0">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="mb-0 fw-bold text-primary">
-                                <span><?php echo htmlspecialchars($row['username']); ?></span>
-                                <span class="fw-normal text-muted fs-6">
-                                    <?php echo formatCommentTime($row['created_at']); ?>
-                                </span>
-                            </h6>
-                            <span class="badge bg-light text-dark">
-                                👍 <?php echo htmlspecialchars($row['votes']); ?>
-                            </span>
+            <div class="comments-panel my-panel p-3">
+                <h5 class="mb-3">Comments</h5>
+                <?php
+                if (mysqli_num_rows($result) === 0) { ?>
+                    <div class="text-muted small">No comments yet — be the first to post.</div>
+                <?php } else {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $username = htmlspecialchars($row['username']);
+                        $text = nl2br(htmlspecialchars($row['text']));
+                        // formatCommentTime echoes formatted time directly
+                        $votes = (int) $row['votes'];
+                        ?>
+                        <div class="comment d-flex mb-3">
+                            <div class="comment-avatar me-3">
+                                <?php // simple initials avatar ?>
+                                <div class="avatar-circle"><?php echo strtoupper(substr($username, 0, 1)); ?></div>
+                            </div>
+                            <div class="comment-body flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <strong class="username"><?php echo $username; ?></strong>
+                                        <span
+                                            class="ms-2 text-muted small"><?php formatCommentTime($row['created_at']); ?></span>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="vote-count small text-muted">👍 <?php echo $votes; ?></div>
+                                    </div>
+                                </div>
+                                <div class="comment-text mt-2 text-dark">
+                                    <?php echo $text; ?>
+                                </div>
+                                <div class="comment-actions mt-2 small">
+                                    <a href="#" class="me-3 text-decoration-none">Reply</a>
+                                    <a href="#" class="me-3 text-decoration-none">Report</a>
+                                    <a href="#" class="text-decoration-none">Share</a>
+                                </div>
+                            </div>
                         </div>
-                        <p class="card-text text-dark mb-0">
-                            <?php echo nl2br(htmlspecialchars($row['text'])); ?>
-                        </p>
-                    </div>
-                </div>
-            <?php } ?>
+                    <?php }
+                } ?>
+            </div>
         </div>
 
         <!-- Right column: Stats / Sidebar -->
@@ -122,7 +141,7 @@ if (isset($_SESSION["loggedin"])) {
                             <span class="col-3">Pts</span>
                         </div>
 
-                        <?php foreach ($fullStandings as $team) { ?>
+                        <?php foreach ($table as $team) { ?>
                             <?php
                             $borderClass = "";
                             if ($team['position'] === 5)
@@ -134,12 +153,12 @@ if (isset($_SESSION["loggedin"])) {
                             ?>
                             <div class="row my-1 <?php echo $borderClass; ?>">
                                 <span class="col-1">
-                                    <img style="width: 20px; height: 20px;" src="<?php echo $team['team']['crest']; ?>" alt="">
+                                    <img style="width: 20px; height: 20px;" src="<?php echo $team['crest'] ?>" alt="">
                                 </span>
-                                <span class="col-5"><?php echo $team['team']['shortName']; ?></span>
-                                <span class="col-1"><?php echo $team['won']; ?></span>
-                                <span class="col-1"><?php echo $team['draw']; ?></span>
-                                <span class="col-1"><?php echo $team['lost']; ?></span>
+                                <span class="col-5"><?php echo $team['team_name']; ?></span>
+                                <span class="col-1"><?php echo $team['wins']; ?></span>
+                                <span class="col-1"><?php echo $team['draws']; ?></span>
+                                <span class="col-1"><?php echo $team['losses']; ?></span>
                                 <span class="col-3 border-start"><?php echo $team['points']; ?></span>
                             </div>
                         <?php } ?>

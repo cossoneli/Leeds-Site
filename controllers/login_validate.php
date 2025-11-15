@@ -21,5 +21,5 @@ if ($id) {
         header('location:../views/signup.php');
     }
 } else {
-    echo "Invalid username or password.";
+    header('location:../views/login.php');
 }

@@ -13,46 +13,73 @@ $table = getTable($connection);
 
 ?>
 
-<div class="container">
-    <div class="col-md-5 mx-auto my-3">
-        <div class="card shadow-sm border-0 p-3">
-            <div class="row">
-                <div class="col-10 mx-auto fw-bold">Premier League Full Table</div>
+<div class="container my-5">
+    <div class="col-md-7 mx-auto">
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+            <div class="card-header text-dark text-center py-3">
+                <h4 class="mb-0">
+                    Premier League Table
+                </h4>
             </div>
-            <div class="container">
-                <div class="row my-2">
-                    <span class="col-1"></span>
-                    <span class="col-3">Club</span>
-                    <span class="col-1">W</span>
-                    <span class="col-1">D</span>
-                    <span class="col-1">L</span>
-                    <span class="col-2">GD</span>
-                    <span class="col-3">Pts</span>
+
+            <div class="card-body bg-light p-4">
+                <div class="row fw-bold border-bottom pb-2 mb-2 text-secondary">
+                    <div class="col-1 text-center">#</div>
+                    <div class="col-3">Club</div>
+                    <div class="col-1 text-center">W</div>
+                    <div class="col-1 text-center">D</div>
+                    <div class="col-1 text-center">L</div>
+                    <div class="col-2 text-center">GD</div>
+                    <div class="col-2 text-center">Pts</div>
                 </div>
 
-                <?php foreach ($table as $team) { ?>
+                <?php foreach ($table as $team): ?>
                     <?php
+                    $pos = (int) $team['position'];
                     $borderClass = "";
-                    if ($team['position'] === '5')
-                        $borderClass = "border-top border-success";
-                    else if ($team['position'] === '6')
-                        $borderClass = "border-top border-info";
-                    else if ($team['position'] === '18')
-                        $borderClass = "border-top border-danger";
+
+                    if ($pos === 4)
+                        $borderClass = "border-success";
+                    else if ($pos === 5)
+                        $borderClass = "border-info";
+                    else if ($pos === 17)
+                        $borderClass = "border-danger";
                     ?>
-                    <div class="row my-1 <?php echo $borderClass; ?>">
-                        <span class="col-1">
-                            <img style="width: 20px; height: 20px;" src="<?php echo $team['crest']; ?>" alt="">
-                        </span>
-                        <span class="col-3"><?php echo $team['abr']; ?></span>
-                        <span class="col-1"><?php echo $team['wins']; ?></span>
-                        <span class="col-1"><?php echo $team['draws']; ?></span>
-                        <span class="col-1"><?php echo $team['losses']; ?></span>
-                        <span class="col-2"><?php echo $team['goal_differential']; ?></span>
-                        <span class="col-3 border-start"><?php echo $team['points']; ?></span>
+                    <div class="row align-items-center py-2 border-bottom hover-shadow-sm <?php echo $borderClass; ?>">
+                        <div class="col-1 text-center fw-bold text-muted"><?php echo $team['position']; ?></div>
+                        <div class="col-3 d-flex align-items-center gap-2">
+                            <img src="<?php echo $team['crest']; ?>" alt="" class="rounded-circle border"
+                                style="width:24px; height:24px;">
+                            <span class="fw-semibold"><?php echo $team['abr']; ?></span>
+                        </div>
+                        <div class="col-1 text-center"><?php echo $team['wins']; ?></div>
+                        <div class="col-1 text-center"><?php echo $team['draws']; ?></div>
+                        <div class="col-1 text-center"><?php echo $team['losses']; ?></div>
+                        <div class="col-2 text-center"><?php echo $team['goal_differential']; ?></div>
+                        <div class="col-2 text-center fw-bold"><?php echo $team['points']; ?></div>
                     </div>
-                <?php } ?>
+                <?php endforeach; ?>
             </div>
+
+            <div class="card-footer text-center py-3">
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="badge rounded-circle bg-success" style="width:15px; height:15px;"></span>
+                        <small>Champions League</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="badge rounded-circle"
+                            style="width:15px; height:15px; background-color:#cfe2ff;"></span>
+                        <small>Europa League / Conference League</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="badge rounded-circle"
+                            style="width:15px; height:15px; background-color:#f8d7da;"></span>
+                        <small>Relegation</small>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
