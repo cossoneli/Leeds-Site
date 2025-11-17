@@ -1,5 +1,6 @@
 <?php
 require('../models/db_connection.php');
+require('../helpers/auth_helper.php');
 
 session_start();
 
@@ -16,15 +17,12 @@ if (empty($username) || empty($email) || empty($password)) {
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert into database
-$stmt = $connection->prepare("INSERT INTO user (username, email, password) VALUES (?, ?, ?)");
-try {
-    $stmt->execute([$username, $email, $hashedPassword]);
-    $_SESSION['username'] = $username;
-    header('location:../views/home.php');
-} catch (PDOException $e) {
-    if ($e->errorInfo[1] == 1062) {
-        echo "Username or email already exists.";
-    } else {
-        echo "Database error: " . $e->getMessage();
-    }
+if (checkDuplicateEmail($connection, $email)) {
+    header('location:../views/signup.php?error=duplicate');
+    die("Email already registered.");
 }
+
+$stmt = $connection->prepare("INSERT INTO user (username, email, password) VALUES (?, ?, ?)");
+$stmt->execute([$username, $email, $hashedPassword]);
+$_SESSION['username'] = $username;
+header('location:../views/home.php');

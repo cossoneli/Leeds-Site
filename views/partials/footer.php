@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="col-3 d-flex align-items-center mb-3 mb-md-0">
-                <img src="../public/imgs/leeds-logo.png" alt="Leeds United Crest" style="width:40px;" class="me-3">
+                <img src="../public/imgs/leeds_americas.png" alt="Leeds United Crest" style="width:40px;" class="me-3">
                 <span class="fw-bold fs-5">American Leeds</span>
             </div>
 
@@ -10,12 +10,10 @@
                 <span class="fst-italic">“Marching On Together”</span>
                 <span class="fst-italic">“ALAW”</span>
             </div>
-
             <div class="col-3 d-flex justify-content-end">
-                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-youtube"></i></a>
+                <a href="https://x.com/luamericas" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="https://x.com/luamericas" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+                <a href="contact@luamericas.com" class="text-white mx-2"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>

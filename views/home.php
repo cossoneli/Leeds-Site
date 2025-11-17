@@ -45,14 +45,14 @@ $fixtureUtc = new DateTime($nextLeedsFixture['date'], new DateTimeZone("UTC"));
 
 <header class="hero-banner text-white text-center">
     <div class="overlay d-flex flex-column justify-content-center align-items-center">
-        <img src="../public/imgs/leeds-logo.png" alt="Leeds United Logo" class="mb-3 hero-logo">
+        <img src="../public/imgs/leeds_americas.png" alt="Leeds United Logo" class="mb-3 hero-logo">
         <h1 class="display-5 fw-bold">American Leeds</h1>
         <p class="lead fst-italic">MOT ALAW</p>
     </div>
 </header>
 
 <div class="container my-3 py-1 text-center fs-6 fst-italic border-bottom">
-    Tip - Click any panel to go to said chat ( MOT )
+    Click any panel to go to said chat ( MOT )
 </div>
 
 <div class="container my-4">

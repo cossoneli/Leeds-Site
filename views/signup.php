@@ -25,7 +25,13 @@
     </form>
 </div>
 
-
+<?php if (isset($_GET['error']) && $_GET['error'] === 'duplicate'): ?>
+    <div class="container my-3" style="max-width: 400px;">
+        <div class="alert alert-danger text-center" role="alert">
+            Account with email already exists.
+        </div>
+    </div>
+<?php endif; ?>
 
 
 <?php include('partials/footer.php'); ?>

@@ -1,4 +1,6 @@
-<?php include('partials/header.php'); ?>
+<?php
+include('partials/header.php');
+?>
 
 <div class="container my-5" style="max-width: 400px;">
     <h2 class="text-center mb-4" style="color:#1D428A; font-weight: bold;">Login</h2>
@@ -19,6 +21,16 @@
         </button>
     </form>
 </div>
+
+
+
+<?php if (isset($_GET['error']) && $_GET['error'] === 'invalid'): ?>
+    <div class="container my-3" style="max-width: 400px;">
+        <div class="alert alert-danger text-center" role="alert">
+            Incorrect email or password.
+        </div>
+    </div>
+<?php endif; ?>
 
 
 

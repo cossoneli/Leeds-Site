@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LU Americas</title>
+    <title>American Leeds</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../views/styles/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -30,16 +30,19 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="home.php">Home</a>
+                        <a class="nav-link" href="home.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="table.php">Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="groups.php">Groups</a>
+                        <a class="nav-link" href="chat.php">Chat</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">About</a>
+                        <a class="nav-link" href="fixtures.php">Fixtures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="groups.php">Groups</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="faq.php">FAQ</a>

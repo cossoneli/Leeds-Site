@@ -21,5 +21,5 @@ if ($id) {
         header('location:../views/signup.php');
     }
 } else {
-    header('location:../views/login.php');
+    header('location:../views/login.php?error=invalid');
 }

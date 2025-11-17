@@ -5,6 +5,7 @@ include('../models/db_connection.php');
 include('../includes/api.php');
 include('../helpers/table_helper.php');
 include('../helpers/fixtures_helper.php');
+include('../helpers/auth_helper.php');
 
 //----------------------------------------FETCH APIS FOR DATA
 
@@ -34,6 +35,8 @@ switch ($topic) {
         $thread_id = 1;
 }
 
+$_SESSION['thread_id'] = $thread_id;
+
 $query = "SELECT * FROM `thread_comments` WHERE thread_id = $thread_id ORDER BY created_at DESC";
 
 $result = mysqli_query($connection, $query);
@@ -48,32 +51,38 @@ if (!$result)
         <p class="text-muted mb-0">Match Thread</p>
     </div>
 </div>
-<?php
-
-if (isset($_SESSION["loggedin"])) {
-    ?>
+<?php if (isLoggedIn()) { ?>
     <div class="container mt-4">
-        <div class="card shadow-sm border-0 w-75 mx-auto">
-            <div class="card-body">
-                <h5 class="card-title mb-3">Leave a Comment</h5>
-                <form action="../controllers/insert_data.php" method="POST">
-                    <div class="mb-3">
-                        <label for="comment" class="form-label">Comment</label>
-                        <textarea class="form-control" id="comment" name="comment" rows="3"
+        <div class="card shadow-sm border-0 w-50 mx-auto" style="border-radius: 10px;">
+            <div class="card-body py-3">
+                <h6 class="card-title mb-2 text-center">Leave a Comment</h6>
+
+                <form action="../controllers/insert_comment.php" method="POST">
+                    <div class="mb-2">
+                        <textarea class="form-control" id="comment" name="comment" rows="2"
                             placeholder="Write your comment..." required></textarea>
+                        </textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100" name="post_comment">
+                    <button type="submit" class="btn btn-primary w-100 btn-sm" name="post_comment">
                         Post Comment
                     </button>
                 </form>
             </div>
         </div>
     </div>
+    <?php
+} else { ?>
+
+    <div class="container mt-4">
+        <div class="card shadow-sm border-0 w-50 mx-auto" style="border-radius: 10px;">
+            <div class="card-body py-3">
+                <h6 class="card-title mb-2 text-center">Please log in to post comments.</h6>
+            </div>
+        </div>
+    </div>
 
 <?php } ?>
-
-
 
 <div class="container my-4">
     <div class="row">
@@ -112,8 +121,6 @@ if (isset($_SESSION["loggedin"])) {
                                 </div>
                                 <div class="comment-actions mt-2 small">
                                     <a href="#" class="me-3 text-decoration-none">Reply</a>
-                                    <a href="#" class="me-3 text-decoration-none">Report</a>
-                                    <a href="#" class="text-decoration-none">Share</a>
                                 </div>
                             </div>
                         </div>

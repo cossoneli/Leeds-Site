@@ -3,5 +3,5 @@
 
 function formatCommentTime($timestamp)
 {
-    echo substr($timestamp, 5);
+    echo substr($timestamp, 5, 14);
 }
