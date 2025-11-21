@@ -20,6 +20,8 @@ $previousLeedsFixture = end($playedFixtures);
 
 $topic = $_GET['topic'] ?? 'Discussion Thread';
 
+
+
 $thread_id = 1;
 switch ($topic) {
     case 'Live Table':
@@ -88,7 +90,7 @@ if (!$result)
     <div class="row">
         <!-- Left column: Comments -->
         <div class="col-md-7 d-flex flex-column">
-            <div class="comments-panel my-panel p-3">
+            <div class="comments-panel p-3">
                 <h5 class="mb-3">Comments</h5>
                 <?php
                 if (mysqli_num_rows($result) === 0) { ?>
@@ -100,27 +102,31 @@ if (!$result)
                         // formatCommentTime echoes formatted time directly
                         $votes = (int) $row['votes'];
                         ?>
-                        <div class="comment d-flex mb-3">
-                            <div class="comment-avatar me-3">
-                                <?php // simple initials avatar ?>
-                                <div class="avatar-circle"><?php echo strtoupper(substr($username, 0, 1)); ?></div>
-                            </div>
-                            <div class="comment-body flex-grow-1">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <strong class="username"><?php echo $username; ?></strong>
-                                        <span
-                                            class="ms-2 text-muted small"><?php formatCommentTime($row['created_at']); ?></span>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="vote-count small text-muted">👍 <?php echo $votes; ?></div>
-                                    </div>
+                        <div class="comment-panel d-flex flex-column">
+                            <div class="comment d-flex mb-3">
+                                <div class="comment-avatar me-3">
+                                    <?php // simple initials avatar ?>
+                                    <div class="avatar-circle"><?php echo strtoupper(substr($username, 0, 1)); ?></div>
                                 </div>
-                                <div class="comment-text mt-2 text-dark">
-                                    <?php echo $text; ?>
-                                </div>
-                                <div class="comment-actions mt-2 small">
-                                    <a href="#" class="me-3 text-decoration-none">Reply</a>
+                                <div class="comment-body flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <strong class="username"><?php echo $username; ?></strong>
+                                            <span
+                                                class="ms-2 text-muted small"><?php formatCommentTime($row['created_at']); ?></span>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="vote-count small bg-light border rounded p-1 text-muted">👍
+                                                <?php echo $votes; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-text mt-2 text-dark">
+                                        <?php echo $text; ?>
+                                    </div>
+                                    <div class="comment-actions mt-2 small">
+                                        <span class="reply-button me-3 text-primary text-decoration-none">Reply</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -169,6 +175,25 @@ if (!$result)
                                 <span class="col-3 border-start"><?php echo $team['points']; ?></span>
                             </div>
                         <?php } ?>
+                    </div>
+                <?php } ?>
+
+                <!-- ----------------------------------- NEXT FIXTURE -->
+                <?php if ($_GET['topic'] === "Next Fixture") { ?>
+                    <div class="row">
+                        <div style="font-size: 14px;" class="col-4 mx-auto text-center">
+                            <?php echo "Premier League" ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="font-size: 10px;" class="col-4 mx-auto text-center text-muted">
+                            <?php echo "Matchday " . $nextLeedsFixture['matchday'] ?>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-between mx-1">
+                        <img style="width: 120px;" src="<?php echo $nextLeedsFixture['home_crest'] ?>" alt="">
+                        <img style="width: 120px;" src="https://crests.football-data.org/PL.png" alt="">
+                        <img style="width: 120px;" src="<?php echo $nextLeedsFixture['away_crest'] ?>" alt="">
                     </div>
                 <?php } ?>
 

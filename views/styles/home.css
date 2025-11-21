@@ -122,3 +122,7 @@
   .avatar-circle { width: 40px; height: 40px; font-size: 0.95rem }
   .comments-panel { padding: 0.75rem }
 }
+
+.reply-button {
+  cursor: pointer;
+} 
