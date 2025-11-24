@@ -36,9 +36,6 @@
                         <a class="nav-link" href="table.php">Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="chat.php">Chat</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="fixtures.php">Fixtures</a>
                     </li>
                     <li class="nav-item">

@@ -123,6 +123,10 @@
   .comments-panel { padding: 0.75rem }
 }
 
-.reply-button {
+.reply-button:hover {
+  cursor: pointer;
+} 
+
+.vote-count:hover {
   cursor: pointer;
 } 

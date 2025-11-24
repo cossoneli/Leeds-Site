@@ -116,9 +116,10 @@ if (!$result)
                                                 class="ms-2 text-muted small"><?php formatCommentTime($row['created_at']); ?></span>
                                         </div>
                                         <div class="text-end">
-                                            <div class="vote-count small bg-light border rounded p-1 text-muted">👍
+                                            <button data-id="<?php echo $row['id'] ?>"
+                                                class="vote-count small bg-light border rounded p-1 text-muted">👍
                                                 <?php echo $votes; ?>
-                                            </div>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="comment-text mt-2 text-dark">

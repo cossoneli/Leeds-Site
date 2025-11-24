@@ -19,7 +19,7 @@
     </div>
 
     <div class="text-center mt-3 small">
-        © <?php echo date("Y"); ?> American Leeds. All Rights Reserved.
+        © <?php echo date("Y"); ?>
     </div>
 </footer>
 
@@ -44,7 +44,7 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="./scripts/home.js"></script>
-
+<script src="./scripts/thread.js"></script>
 
 </body>
 

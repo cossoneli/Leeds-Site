@@ -36,7 +36,6 @@ $(document).ready(() => {
 
     // live match countdown
     const matchTime = window.fixtureDate;
-    console.log(matchTime);
 
     updateCountdown();
 
