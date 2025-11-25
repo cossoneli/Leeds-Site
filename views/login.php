@@ -1,5 +1,6 @@
 <?php
-include('partials/header.php');
+include __DIR__ . '/partials/header.php';
+
 ?>
 
 <div class="container my-5" style="max-width: 400px;">
@@ -35,4 +36,5 @@ include('partials/header.php');
 
 
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

@@ -8,4 +8,5 @@
 
 
 
-<?php include('../views/partials/footer.php'); ?>
+<?php include __DIR__ . '/../views/partials/footer.php';
+?>

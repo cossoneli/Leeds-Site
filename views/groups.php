@@ -1,6 +1,6 @@
 <?php
-include('partials/header.php');
-include('../helpers/location_names.php');
+include __DIR__ . '/partials/header.php';
+include __DIR__ . '/../helpers/location_names.php';
 ?>
 
 
@@ -28,4 +28,5 @@ include('../helpers/location_names.php');
 </div>
 
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

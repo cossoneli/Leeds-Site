@@ -1,6 +1,6 @@
 <?php
 
-require('../models/db_connection.php');
+require __DIR__ . '/../models/db_connection.php';
 
 $email = trim($_POST['email']);
 $password = trim($_POST['password']);

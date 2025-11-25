@@ -1,6 +1,6 @@
 <?php
-require('../models/db_connection.php');
-require('../helpers/auth_helper.php');
+require __DIR__ . '/../models/db_connection.php';
+require __DIR__ . '/../helpers/auth_helper.php';
 
 session_start();
 

@@ -162,4 +162,5 @@ $fixtureUtc = new DateTime($nextLeedsFixture['date'], new DateTimeZone("UTC"));
     window.fixtureDate = new Date(<?php echo json_encode($fixtureUtc->format(DateTime::ATOM)); ?>);
 </script>
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

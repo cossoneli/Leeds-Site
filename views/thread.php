@@ -1,11 +1,11 @@
 <?php
-include('partials/header.php');
-include('../helpers/thread_helpers.php');
-include('../models/db_connection.php');
-include('../includes/api.php');
-include('../helpers/table_helper.php');
-include('../helpers/fixtures_helper.php');
-include('../helpers/auth_helper.php');
+include __DIR__ . '/partials/header.php';
+include __DIR__ . '/../helpers/thread_helpers.php';
+include __DIR__ . '/../models/db_connection.php';
+include __DIR__ . '/../includes/api.php';
+include __DIR__ . '/../helpers/table_helper.php';
+include __DIR__ . '/../helpers/fixtures_helper.php';
+include __DIR__ . '/../helpers/auth_helper.php';
 
 //----------------------------------------FETCH APIS FOR DATA
 
@@ -232,4 +232,5 @@ if (!$result)
 
 
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

@@ -1,7 +1,7 @@
 <?php
-include('partials/header.php');
-include('../helpers/fixtures_helper.php');
-include("../models/db_connection.php");
+include __DIR__ . '/partials/header.php';
+include __DIR__ . '/../helpers/fixtures_helper.php';
+include __DIR__ . '/../models/db_connection.php';
 
 $fixtures = getScheduledFixtures($connection);
 ?>
@@ -52,4 +52,5 @@ $fixtures = getScheduledFixtures($connection);
     <?php endif; ?>
 </div>
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

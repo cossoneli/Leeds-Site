@@ -1,6 +1,6 @@
 <?php
 
-require('../models/db_connection.php');
+require __DIR__ . '/../models/db_connection.php';
 
 session_start();
 

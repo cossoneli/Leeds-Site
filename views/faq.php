@@ -1,4 +1,5 @@
-<?php include('partials/header.php'); ?>
+<?php include __DIR__ . '/partials/header.php';
+?>
 
 <h1 class="fw-light text-center mt-3">Frequently Asked Questions</h1>
 
@@ -192,4 +193,5 @@
     </div>
 </div>
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

@@ -1,4 +1,5 @@
-<?php include('partials/header.php'); ?>
+<?php include __DIR__ . '/partials/header.php';
+?>
 
 <div class="container my-5" style="max-width: 400px;">
     <h2 class="text-center mb-4" style="color:#1D428A; font-weight: bold;">Sign Up</h2>
@@ -34,4 +35,5 @@
 <?php endif; ?>
 
 
-<?php include('partials/footer.php'); ?>
+<?php include __DIR__ . '/partials/footer.php';
+?>

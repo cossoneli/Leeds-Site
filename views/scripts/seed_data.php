@@ -1,10 +1,10 @@
 <?php
 
-include("../models/db_connection.php");
-include("../includes/api.php");
-include("../models/team_model.php");
-include("../models/table_model.php");
-include("../models/fixtures_model.php");
+include __DIR__ . '/../models/db_connection.php';
+include __DIR__ . '/../includes/api.php';
+include __DIR__ . '/../models/team_model.php';
+include __DIR__ . '/../models/table_model.php';
+include __DIR__ . '/../models/fixtures_model.php';
 
 $plTeams = getFootballData("competitions/PL/teams");
 
