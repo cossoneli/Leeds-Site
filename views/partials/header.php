@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../views/styles/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="./styles/home.css">
+    <link rel="icon" type="image/png" href="../public/imgs/leeds_americas.png">
 </head>
 
 <body>
