@@ -1,4 +1,2 @@
 <?php
-
-header("Location: ../views/home.php");
-exit();
+require_once __DIR__ . '/../views/home.php';
