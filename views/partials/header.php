@@ -31,19 +31,19 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="home.php">Home</a>
+                        <a class="nav-link" href="/?page=home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="table.php">Table</a>
+                        <a class="nav-link" href="/?page=table">Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="fixtures.php">Fixtures</a>
+                        <a class="nav-link" href="/?page=fixtures">Fixtures</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="groups.php">Groups</a>
+                        <a class="nav-link" href="/?page=groups">Groups</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="faq.php">FAQ</a>
+                        <a class="nav-link" href="/?page=faq">FAQ</a>
                     </li>
                 </ul>
 
@@ -52,20 +52,20 @@
                     session_start();
                     if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
-                            <a href="../controllers/logout.php" class="nav-link btn rounded-pill px-3 ms-2"
+                            <a href="../controllers/?page=logout" class="nav-link btn rounded-pill px-3 ms-2"
                                 style="background-color: #1D428A; color: #FFCD00; border: 2px solid #FFCD00;">
                                 Logout
                             </a>
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 ms-2" href="login.php"
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="/?page=login"
                                 style="background-color: white; color: #1D428A; border: 2px solid #1D428A;">
                                 Log in
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 ms-2" href="signup.php"
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="/?page=signup"
                                 style="background-color: #FFCD00; color: #1D428A; border: 2px solid #1D428A;">
                                 Sign up
                             </a>
