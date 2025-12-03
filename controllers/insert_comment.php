@@ -12,5 +12,5 @@ $stmt = $connection->prepare("INSERT INTO thread_comments (thread_id, username, 
 $stmt->bind_param("iss", $thread_id, $username, $comment);
 $stmt->execute();
 
-header("Location:../views/home.php");
+header("Location: /LeedsSite/public/index.php?page=home" . $thread_id);
 exit();

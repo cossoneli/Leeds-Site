@@ -1,3 +1,8 @@
+<?php
+$baseUrl = '/LeedsSite/public'; // local development base URL
+// $baseUrl = ''; // production base URL
+?>
+
 <footer class="leeds-footer text-white py-4 mt-5">
     <div class="container">
         <div class="row d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -36,15 +41,13 @@
     }
 </style>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="./scripts/home.js"></script>
-<script src="./scripts/thread.js"></script>
+<script src="<?= $baseUrl ?>/assets/js/home.js"></script>
+<script src="<?= $baseUrl ?>/assets/js/thread.js"></script>
 
 </body>
 

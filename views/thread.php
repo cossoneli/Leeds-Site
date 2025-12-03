@@ -1,11 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <?php
-include __DIR__ . '/partials/header.php';
+$baseUrl = '/LeedsSite/public';
+// Switch to this for deployment v
+// $baseUrl = '';
+
+session_start();
+
+?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Leeds</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/assets/css/home.css">
+    <link rel="icon" href="<?= $baseUrl ?>/imgs/leeds_americas.png">
+</head>
+
+
+<?php
+// include __DIR__ . '/partials/header.php';
 include __DIR__ . '/../helpers/thread_helpers.php';
 include __DIR__ . '/../models/db_connection.php';
 include __DIR__ . '/../includes/api.php';
 include __DIR__ . '/../helpers/table_helper.php';
 include __DIR__ . '/../helpers/fixtures_helper.php';
 include __DIR__ . '/../helpers/auth_helper.php';
+
+$baseUrl = '/LeedsSite';
+// Switch to this for deployment v
+// $baseUrl = '';
 
 //----------------------------------------FETCH APIS FOR DATA
 
@@ -17,10 +46,7 @@ $previousLeedsFixture = end($playedFixtures);
 
 // ------------------------------------------------------------
 
-
 $topic = $_GET['topic'] ?? 'Discussion Thread';
-
-
 
 $thread_id = 1;
 switch ($topic) {
@@ -59,7 +85,7 @@ if (!$result)
             <div class="card-body py-3">
                 <h6 class="card-title mb-2 text-center">Leave a Comment</h6>
 
-                <form action="../controllers/insert_comment.php" method="POST">
+                <form action="<?= $baseUrl ?>/controllers/insert_comment.php" method="POST">
                     <div class="mb-2">
                         <textarea class="form-control" id="comment" name="comment" rows="2"
                             placeholder="Write your comment..." required></textarea>
@@ -79,7 +105,8 @@ if (!$result)
     <div class="container mt-4">
         <div class="card shadow-sm border-0 w-50 mx-auto" style="border-radius: 10px;">
             <div class="card-body py-3">
-                <h6 class="card-title mb-2 text-center">Please log in to post comments.</h6>
+                <h6 class="card-title mb-2 text-center">Please <a href="<?= $baseUrl ?>/public/index.php?page=login">log
+                        in</a> to post comments.</h6>
             </div>
         </div>
     </div>

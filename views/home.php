@@ -7,6 +7,9 @@ include(__DIR__ . '/../helpers/table_helper.php');
 include(__DIR__ . '/../helpers/fixtures_helper.php');
 include(__DIR__ . '/../models/table_model.php');
 
+$baseUrl = '/LeedsSite/public';
+// Switch to this for deployment v
+// $baseUrl = '';
 
 // ----------------------------------FETCH DATABASE FOR TABLE AND FIXTURES
 
@@ -46,7 +49,7 @@ $fixtureUtc = new DateTime($nextLeedsFixture['date'], new DateTimeZone("UTC"));
 
 <header class="hero-banner text-white text-center">
     <div class="overlay d-flex flex-column justify-content-center align-items-center">
-        <img src="../public/imgs/leeds_americas.png" alt="Leeds United Logo" class="mb-3 hero-logo">
+        <img src="<?= $baseUrl ?>/imgs/leeds_americas.png" alt="Leeds United Logo" class="mb-3 hero-logo">
         <h1 class="display-5 fw-bold">American Leeds</h1>
         <p class="lead fst-italic">MOT ALAW</p>
     </div>

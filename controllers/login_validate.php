@@ -1,5 +1,9 @@
 <?php
 
+$baseUrl = '/LeedsSite/public';
+// Switch to this for deployment v
+// $baseUrl = '';
+
 require __DIR__ . '/../models/db_connection.php';
 
 $email = trim($_POST['email']);
@@ -16,10 +20,10 @@ if ($id) {
     if (password_verify($password, $hashedPassword)) {
         session_start();
         $_SESSION['username'] = $username;
-        header('location:../views/home.php');
+        header("location: {$baseUrl}/index.php?page=home");
     } else {
-        header('location:../views/signup.php');
+        header("location: {$baseUrl}/index.php?page=signup");
     }
 } else {
-    header('location:../views/login.php?error=invalid');
+    header("location: {$baseUrl}/index.php?page=login&error=invalid");
 }

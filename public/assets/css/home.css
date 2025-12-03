@@ -1,6 +1,7 @@
 .hero-banner {
   position: relative;
-  background: url('../../public/imgs/elland-road.jpeg') center/cover no-repeat;
+  background: url('/LeedsSite/public/imgs/elland-road.jpeg') center/cover no-repeat;  
+  /* Switch this url for production */
   height: 320px;
 }
 

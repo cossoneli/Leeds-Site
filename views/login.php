@@ -1,11 +1,13 @@
 <?php
 include __DIR__ . '/partials/header.php';
-
+$baseUrl = '/LeedsSite';
+// Switch to this for deployment v
+// $baseUrl = '';
 ?>
 
 <div class="container my-5" style="max-width: 400px;">
     <h2 class="text-center mb-4" style="color:#1D428A; font-weight: bold;">Login</h2>
-    <form action="../controllers/login_validate.php" method="POST">
+    <form action="<?= $baseUrl ?>/controllers/login_validate.php" method="POST">
         <div class="mb-3">
             <label for="email" class="form-label" style="color:#1D428A;">Email address</label>
             <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
