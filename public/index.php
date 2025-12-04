@@ -6,6 +6,7 @@ $page = $_GET['page'] ?? 'home';
 
 $viewPath = dirname(__DIR__) . '/views/';
 $controllerPath = dirname(__DIR__) . '/controllers/';
+$helperPath = dirname(__DIR__) . '/helpers/';
 
 switch ($page) {
     case 'home':
@@ -34,6 +35,9 @@ switch ($page) {
         break;
     case 'insert_comment':
         require $controllerPath . 'insert_comment.php';
+        break;
+    case 'upvote':
+        require $helperPath . 'vote_comment.php';
         break;
     default:
         require $viewPath . 'home.php';

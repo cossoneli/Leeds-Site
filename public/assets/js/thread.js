@@ -9,7 +9,7 @@ $(document).ready(() => {
         const commentId = el.data('id');
 
         // AJAX REQUEST TO UPVOTE THE COMMENT
-        $.post('../helpers/vote_comment.php', { comment_id: commentId }, function(response) {
+        $.post('/index.php?page=upvote', { comment_id: commentId }, function(response) {
             el.text("👍 " + response.newVotes);
         }, "json");
     });
