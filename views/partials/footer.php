@@ -1,13 +1,13 @@
 <?php
-$baseUrl = '/LeedsSite/public'; // local development base URL
-// $baseUrl = ''; // production base URL
+// $baseUrl = '/LeedsSite/public'; // local development base URL
+$baseUrl = ''; // production base URL
 ?>
 
 <footer class="leeds-footer text-white py-4 mt-5">
     <div class="container">
         <div class="row d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="col-3 d-flex align-items-center mb-3 mb-md-0">
-                <img src="../public/imgs/leeds_americas.png" alt="Leeds United Crest" style="width:40px;" class="me-3">
+                <img src="/imgs/leeds_americas.png" alt="Leeds United Crest" style="width:40px;" class="me-3">
                 <span class="fw-bold fs-5">American Leeds</span>
             </div>
 

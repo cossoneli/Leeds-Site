@@ -2,9 +2,9 @@
 <html lang="en">
 
 <?php
-$baseUrl = '/LeedsSite/public';
+// $baseUrl = '/LeedsSite/public';
 // Switch to this for deployment v
-// $baseUrl = '';
+$baseUrl = '';
 
 session_start();
 
@@ -31,10 +31,6 @@ include __DIR__ . '/../includes/api.php';
 include __DIR__ . '/../helpers/table_helper.php';
 include __DIR__ . '/../helpers/fixtures_helper.php';
 include __DIR__ . '/../helpers/auth_helper.php';
-
-$baseUrl = '/LeedsSite';
-// Switch to this for deployment v
-// $baseUrl = '';
 
 //----------------------------------------FETCH APIS FOR DATA
 
@@ -85,7 +81,7 @@ if (!$result)
             <div class="card-body py-3">
                 <h6 class="card-title mb-2 text-center">Leave a Comment</h6>
 
-                <form action="<?= $baseUrl ?>/controllers/insert_comment.php" method="POST">
+                <form action="<?= $baseUrl ?>/index.php?page=insert_comment" method="POST">
                     <div class="mb-2">
                         <textarea class="form-control" id="comment" name="comment" rows="2"
                             placeholder="Write your comment..." required></textarea>
@@ -105,7 +101,7 @@ if (!$result)
     <div class="container mt-4">
         <div class="card shadow-sm border-0 w-50 mx-auto" style="border-radius: 10px;">
             <div class="card-body py-3">
-                <h6 class="card-title mb-2 text-center">Please <a href="<?= $baseUrl ?>/public/index.php?page=login">log
+                <h6 class="card-title mb-2 text-center">Please <a href="<?= $baseUrl ?>/index.php?page=login">log
                         in</a> to post comments.</h6>
             </div>
         </div>

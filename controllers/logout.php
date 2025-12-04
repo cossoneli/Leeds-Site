@@ -1,8 +1,8 @@
 <?php
 
-$baseUrl = '/LeedsSite/public';
+// $baseUrl = '/LeedsSite/public';
 // Switch to this for deployment v
-// $baseUrl = '';
+$baseUrl = '';
 
 session_start();
 $_SESSION = [];

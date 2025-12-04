@@ -5,6 +5,7 @@
 $page = $_GET['page'] ?? 'home';
 
 $viewPath = dirname(__DIR__) . '/views/';
+$controllerPath = dirname(__DIR__) . '/controllers/';
 
 switch ($page) {
     case 'home':
@@ -30,6 +31,9 @@ switch ($page) {
         break;
     case 'thread':
         require $viewPath . 'thread.php';
+        break;
+    case 'insert_comment':
+        require $controllerPath . 'insert_comment.php';
         break;
     default:
         require $viewPath . 'home.php';

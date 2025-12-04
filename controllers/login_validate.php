@@ -1,8 +1,8 @@
 <?php
 
-$baseUrl = '/LeedsSite/public';
+// $baseUrl = '/LeedsSite/public';
 // Switch to this for deployment v
-// $baseUrl = '';
+$baseUrl = '';
 
 require __DIR__ . '/../models/db_connection.php';
 

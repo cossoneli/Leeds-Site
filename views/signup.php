@@ -1,7 +1,7 @@
 <?php include __DIR__ . '/partials/header.php';
 
-$baseUrl = '/LeedsSite'; // local development base URL
-// $baseUrl = ''; // production base URL
+// $baseUrl = '/LeedsSite'; // local development base URL
+$baseUrl = ''; // production base URL
 ?>
 
 <div class="container my-5" style="max-width: 400px;">

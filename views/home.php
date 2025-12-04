@@ -7,9 +7,9 @@ include(__DIR__ . '/../helpers/table_helper.php');
 include(__DIR__ . '/../helpers/fixtures_helper.php');
 include(__DIR__ . '/../models/table_model.php');
 
-$baseUrl = '/LeedsSite/public';
+// $baseUrl = '/LeedsSite/public';
 // Switch to this for deployment v
-// $baseUrl = '';
+$baseUrl = '';
 
 // ----------------------------------FETCH DATABASE FOR TABLE AND FIXTURES
 

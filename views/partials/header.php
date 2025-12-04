@@ -2,8 +2,8 @@
 <html lang="en">
 
 <?php
-$baseUrl = '/LeedsSite/public'; // local development base URL
-// $baseUrl = ''; // production base URL
+// $baseUrl = '/LeedsSite/public'; // local development base URL
+$baseUrl = ''; // production base URL
 ?>
 
 <head>
