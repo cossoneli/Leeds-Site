@@ -36,6 +36,15 @@ switch ($page) {
     case 'insert_comment':
         require $controllerPath . 'insert_comment.php';
         break;
+    case 'signup_val':
+        require $controllerPath . 'signup_validate.php';
+        break;
+    case 'login_val':
+        require $controllerPath . 'login_validate.php';
+        break;
+    case 'logout':
+        require $controllerPath . 'logout.php';
+        break;
     case 'upvote':
         require $helperPath . 'vote_comment.php';
         break;

@@ -6,7 +6,7 @@ $baseUrl = ''; // production base URL
 
 <div class="container my-5" style="max-width: 400px;">
     <h2 class="text-center mb-4" style="color:#1D428A; font-weight: bold;">Sign Up</h2>
-    <form action="<?= $baseUrl ?>/controllers/signup_validate.php" method="POST">
+    <form action="<?= $baseUrl ?>/index.php?page=signup_val" method="POST">
         <div class="mb-3">
             <label for="user_name" class="form-label" style="color:#1D428A;">Username</label>
             <input type="text" class="form-control" name="user_name" id="user_name"

@@ -57,7 +57,7 @@ $baseUrl = ''; // production base URL
                     session_start();
                     if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
-                            <a href="/LeedsSite/controllers/logout.php" class="nav-link btn rounded-pill px-3 ms-2"
+                            <a href="/index.php?page=logout" class="nav-link btn rounded-pill px-3 ms-2"
                                 style="background-color: #1D428A; color: #FFCD00; border: 2px solid #FFCD00;">
                                 Logout
                             </a>
