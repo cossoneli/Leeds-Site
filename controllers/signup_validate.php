@@ -4,9 +4,11 @@ require __DIR__ . '/../helpers/auth_helper.php';
 
 session_start();
 
-// $baseUrl = '/LeedsSite/public';
-// Switch to this for deployment v
-$baseUrl = '';
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 
 $username = trim($_POST['user_name']);
 $email = trim($_POST['email']);

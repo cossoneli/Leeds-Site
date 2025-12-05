@@ -64,7 +64,7 @@ $table = getTable($connection);
             <div class="card-footer text-center py-3">
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
                     <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle bg-success" style="width:15px; height:15px;"></span>
+                        <span class="badge rounded-circle" style="width:15px; height:15px;"></span>
                         <small>Champions League</small>
                     </div>
                     <div class="d-flex align-items-center gap-1">

@@ -2,9 +2,11 @@
 <html lang="en">
 
 <?php
-// $baseUrl = '/LeedsSite/public';
-// Switch to this for deployment v
-$baseUrl = '';
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 
 session_start();
 
@@ -170,11 +172,10 @@ if (!$result)
                     </div>
                     <div class="container">
                         <div class="row my-2">
-                            <span class="col-1"></span>
-                            <span class="col-5">Club</span>
-                            <span class="col-1">W</span>
-                            <span class="col-1">D</span>
-                            <span class="col-1">L</span>
+                            <span class="col-3"></span>
+                            <span class="col-2">W</span>
+                            <span class="col-2">D</span>
+                            <span class="col-2">L</span>
                             <span class="col-3">Pts</span>
                         </div>
 
@@ -189,13 +190,12 @@ if (!$result)
                                 $borderClass = "border-top border-danger";
                             ?>
                             <div class="row my-1 <?php echo $borderClass; ?>">
-                                <span class="col-1">
-                                    <img style="width: 20px; height: 20px;" src="<?php echo $team['crest'] ?>" alt="">
+                                <span class="col-3">
+                                    <img style="width: 30px; height: 30px;" src="<?php echo $team['crest'] ?>" alt="">
                                 </span>
-                                <span class="col-5"><?php echo $team['team_name']; ?></span>
-                                <span class="col-1"><?php echo $team['wins']; ?></span>
-                                <span class="col-1"><?php echo $team['draws']; ?></span>
-                                <span class="col-1"><?php echo $team['losses']; ?></span>
+                                <span class="col-2"><?php echo $team['wins']; ?></span>
+                                <span class="col-2"><?php echo $team['draws']; ?></span>
+                                <span class="col-2"><?php echo $team['losses']; ?></span>
                                 <span class="col-3 border-start"><?php echo $team['points']; ?></span>
                             </div>
                         <?php } ?>

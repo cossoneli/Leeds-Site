@@ -126,7 +126,7 @@
 
     <h3 class="m-3">American Supporter Culture</h3>
     <div class="accordion mt-3 w-75 mx-auto" id="accordionCulture">
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="cultHeadingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#cultCollapseOne" aria-expanded="false" aria-controls="cultCollapseOne">
@@ -136,12 +136,12 @@
             <div id="cultCollapseOne" class="accordion-collapse collapse" aria-labelledby="cultHeadingOne"
                 data-bs-parent="#accordionCulture">
                 <div class="accordion-body">
-                    Yes! We maintain a constantly growing map of Leeds-friendly pubs and matchday meetups across North
+                    We maintain a constantly growing map of Leeds-friendly pubs and matchday meetups across North
                     and South America.
                 </div>
             </div>
-        </div>
-        <div class="accordion-item">
+        </div> -->
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="cultHeadingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#cultCollapseTwo" aria-expanded="false" aria-controls="cultCollapseTwo">
@@ -155,7 +155,7 @@
                     directory.
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <h3 class="m-3">Website & Account Help</h3>
@@ -170,12 +170,12 @@
             <div id="webCollapseOne" class="accordion-collapse collapse" aria-labelledby="webHeadingOne"
                 data-bs-parent="#accordionWebsite">
                 <div class="accordion-body">
-                    Click the Register button at the top of the site, enter your email, set a password, and you’re in.
+                    Click the Sign Up button at the top of the site, enter your email, set a password, and you’re in.
                     It’s quick and free.
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="webHeadingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#webCollapseTwo" aria-expanded="false" aria-controls="webCollapseTwo">
@@ -189,7 +189,7 @@
                     settings.
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

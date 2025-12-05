@@ -3,7 +3,7 @@ $(document).ready(() => {
     // IF A PANEL IS CLICKED, GO TO THREAD PAGE
     $(".my-panel").click(function() {
         const topic = $(this).data('topic'); // get data-topic
-        window.open('/index.php?page=thread&topic=' + topic, '_blank'); 
+        window.open(baseUrl + '/index.php?page=thread&topic=' + topic, '_blank'); 
     })
 
     $(document).on('click', '.reply-button', function() {
@@ -35,7 +35,9 @@ $(document).ready(() => {
 
 
     // live match countdown
-    const matchTime = window.fixtureDate;
+    let matchTime = new Date(window.fixtureDate).getTime();
+    matchTime = 21600000 * 3  + matchTime;
+    // console.log(new Date(matchTime));
 
     updateCountdown();
 
@@ -44,7 +46,7 @@ $(document).ready(() => {
     // ---------------------------------------SOME HELPER FUNCTIONS
 
     function updateCountdown() {
-        const now = new Date().getTime();
+        const now = Date.now();
         const diff = matchTime - now;
 
         if (diff <= 0) {

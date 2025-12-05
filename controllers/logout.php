@@ -1,8 +1,10 @@
 <?php
 
-// $baseUrl = '/LeedsSite/public';
-// Switch to this for deployment v
-$baseUrl = '';
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 
 session_start();
 $_SESSION = [];

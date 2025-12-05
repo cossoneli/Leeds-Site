@@ -7,9 +7,11 @@ include(__DIR__ . '/../helpers/table_helper.php');
 include(__DIR__ . '/../helpers/fixtures_helper.php');
 include(__DIR__ . '/../models/table_model.php');
 
-// $baseUrl = '/LeedsSite/public';
-// Switch to this for deployment v
-$baseUrl = '';
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 
 // ----------------------------------FETCH DATABASE FOR TABLE AND FIXTURES
 

@@ -1,7 +1,10 @@
 <?php include __DIR__ . '/partials/header.php';
 
-// $baseUrl = '/LeedsSite'; // local development base URL
-$baseUrl = ''; // production base URL
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 ?>
 
 <div class="container my-5" style="max-width: 400px;">

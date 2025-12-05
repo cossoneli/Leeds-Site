@@ -2,8 +2,11 @@
 <html lang="en">
 
 <?php
-// $baseUrl = '/LeedsSite/public'; // local development base URL
-$baseUrl = ''; // production base URL
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 ?>
 
 <head>
@@ -36,19 +39,19 @@ $baseUrl = ''; // production base URL
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=home">Home</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>?page=home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=table">Table</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>?page=table">Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=fixtures">Fixtures</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>?page=fixtures">Fixtures</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=groups">Groups</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>?page=groups">Groups</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=faq">FAQ</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>?page=faq">FAQ</a>
                     </li>
                 </ul>
 
@@ -57,20 +60,20 @@ $baseUrl = ''; // production base URL
                     session_start();
                     if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
-                            <a href="/index.php?page=logout" class="nav-link btn rounded-pill px-3 ms-2"
+                            <a href="<?= $baseUrl ?>/index.php?page=logout" class="nav-link btn rounded-pill px-3 ms-2"
                                 style="background-color: #1D428A; color: #FFCD00; border: 2px solid #FFCD00;">
                                 Logout
                             </a>
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 ms-2" href="?page=login"
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="<?= $baseUrl ?>?page=login"
                                 style="background-color: white; color: #1D428A; border: 2px solid #1D428A;">
                                 Log in
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 ms-2" href="?page=signup"
+                            <a class="nav-link btn rounded-pill px-3 ms-2" href="<?= $baseUrl ?>?page=signup"
                                 style="background-color: #FFCD00; color: #1D428A; border: 2px solid #1D428A;">
                                 Sign up
                             </a>

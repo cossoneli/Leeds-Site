@@ -1,8 +1,11 @@
 <?php
 include __DIR__ . '/partials/header.php';
-// $baseUrl = '/LeedsSite';
-// Switch to this for deployment v
-$baseUrl = '';
+
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 ?>
 
 <div class="container my-5" style="max-width: 400px;">

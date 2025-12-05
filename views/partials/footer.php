@@ -1,13 +1,17 @@
 <?php
-// $baseUrl = '/LeedsSite/public'; // local development base URL
-$baseUrl = ''; // production base URL
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $baseUrl = '/LeedsSite/public'; // local
+} else {
+    $baseUrl = ''; // production
+}
 ?>
 
 <footer class="leeds-footer text-white py-4 mt-5">
     <div class="container">
         <div class="row d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="col-3 d-flex align-items-center mb-3 mb-md-0">
-                <img src="/imgs/leeds_americas.png" alt="Leeds United Crest" style="width:40px;" class="me-3">
+                <img src="<?= $baseUrl ?>/imgs/leeds_americas.png" alt="Leeds United Crest" style="width:40px;"
+                    class="me-3">
                 <span class="fw-bold fs-5">American Leeds</span>
             </div>
 
@@ -45,6 +49,7 @@ $baseUrl = ''; // production base URL
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
+<script>const baseUrl = "<?php echo $baseUrl; ?>"</script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="<?= $baseUrl ?>/assets/js/home.js"></script>
 <script src="<?= $baseUrl ?>/assets/js/thread.js"></script>
