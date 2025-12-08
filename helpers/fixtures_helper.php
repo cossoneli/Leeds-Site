@@ -15,6 +15,7 @@ function getPlayedFixtures($connection)
             JOIN team th ON f.home_name = th.name 
             JOIN team ta ON f.away_name = ta.name
             WHERE f.isFinished = 1
+            ORDER BY f.matchday ASC
             ";
 
     $result = $connection->query($stmt);
@@ -46,6 +47,7 @@ function getScheduledFixtures($connection)
             JOIN team th ON f.home_name = th.name 
             JOIN team ta ON f.away_name = ta.name
             WHERE f.isFinished = 0
+            ORDER BY f.matchday ASC
             ";
 
     $result = $connection->query($stmt);
