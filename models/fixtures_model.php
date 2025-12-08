@@ -32,7 +32,8 @@ function update_fixtures_database($plFixtures, $connection)
         $isFinished = ($fixture['status'] === 'FINISHED') ? true : false;
         $homeScore = $fixture['score']['fullTime']['home'];
         $awayScore = $fixture['score']['fullTime']['away'];
-        $date = $fixture['utcDate'];
+        $rawDate = $fixture['utcDate'];
+        $date = date('Y-m-d H:i:s', strtotime($rawDate));
         $matchday = $fixture['matchday'];
         $homeName = $fixture['homeTeam']['shortName'];
         $awayName = $fixture['awayTeam']['shortName'];
