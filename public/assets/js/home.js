@@ -6,33 +6,6 @@ $(document).ready(() => {
         window.open(baseUrl + '/index.php?page=thread&topic=' + topic, '_blank'); 
     })
 
-    $(document).on('click', '.reply-button', function() {
-        const commentDiv = $(this).closest('.comment');
-
-        const parentDiv = commentDiv.parent();
-
-        // Avoid adding multiple reply forms
-        if (commentDiv.find('.reply-form').length === 0) {
-            const replyForm = `
-                <div class="reply-form d-flex my-3">
-                    <div class="comment-body flex-grow-1">
-                        <textarea class="form-control mb-2" placeholder="Write your reply..."></textarea>
-                        <div class="text-end">
-                            <button class="btn btn-primary btn-sm submit-reply">Reply</button>
-                            <button class="btn btn-secondary btn-sm cancel-reply">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            parentDiv.append(replyForm);
-        }
-    });
-
-    // Optional: Cancel button
-    $(document).on('click', '.cancel-reply', function() {
-        $(this).closest('.reply-form').remove();
-    });
-
 
     // live match countdown
     let matchTime = new Date(window.fixtureDate).getTime();

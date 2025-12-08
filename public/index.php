@@ -36,6 +36,9 @@ switch ($page) {
     case 'insert_comment':
         require $controllerPath . 'insert_comment.php';
         break;
+    case 'insert_reply':
+        require $controllerPath . 'insert_reply.php';
+        break;
     case 'signup_val':
         require $controllerPath . 'signup_validate.php';
         break;

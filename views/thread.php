@@ -44,7 +44,7 @@ $previousLeedsFixture = end($playedFixtures);
 
 // ------------------------------------------------------------
 
-$topic = $_GET['topic'] ?? 'Discussion Thread';
+$topic = $_GET['topic'] ?? $_SESSION['topic'] ?? 'Live Table';
 
 $thread_id = 1;
 switch ($topic) {
@@ -61,6 +61,7 @@ switch ($topic) {
         $thread_id = 1;
 }
 
+$_SESSION['topic'] = $topic;
 $_SESSION['thread_id'] = $thread_id;
 
 $query = "SELECT * FROM `thread_comments` WHERE thread_id = $thread_id ORDER BY created_at DESC";
@@ -128,7 +129,7 @@ if (!$result)
                         $votes = (int) $row['votes'];
                         ?>
                         <div class="comment-panel d-flex flex-column">
-                            <div class="comment d-flex mb-3">
+                            <div class="comment d-flex mb-3" data-parent-comment="<?php echo $row['id'] ?>">
                                 <div class="comment-avatar me-3">
                                     <?php // simple initials avatar ?>
                                     <div class="avatar-circle"><?php echo strtoupper(substr($username, 0, 1)); ?></div>
@@ -166,7 +167,7 @@ if (!$result)
             <div class="card shadow-sm border-0 p-3">
 
                 <!-- ------------------------- LIVE TABLE -->
-                <?php if ($_GET['topic'] === "Live Table") { ?>
+                <?php if ($topic === "Live Table") { ?>
                     <div class="row">
                         <div class="col-10 mx-auto fw-bold">Premier League Full Table</div>
                     </div>
@@ -203,7 +204,7 @@ if (!$result)
                 <?php } ?>
 
                 <!-- ----------------------------------- NEXT FIXTURE -->
-                <?php if ($_GET['topic'] === "Next Fixture") { ?>
+                <?php if ($topic === "Next Fixture") { ?>
                     <div class="row">
                         <div style="font-size: 14px;" class="col-4 mx-auto text-center">
                             <?php echo "Premier League" ?>
@@ -222,7 +223,7 @@ if (!$result)
                 <?php } ?>
 
                 <!-- ----------------------------------- PREVIOUS FIXTURE -->
-                <?php if ($_GET['topic'] === "Previous Fixture") { ?>
+                <?php if ($topic === "Previous Fixture") { ?>
                     <div class="row">
                         <div style="font-size: 14px;" class="col-4 mx-auto text-center">
                             <?php echo "Premier League" ?>
@@ -242,6 +243,12 @@ if (!$result)
                         <span class="col-4 fs-2 text-center"><?php echo $previousLeedsFixture['home_score'] ?></span>
                         <span class="col-4 fw-bold text-center">FT</span>
                         <span class="col-4 fs-2 text-center"><?php echo $previousLeedsFixture['away_score'] ?></span>
+                    </div>
+                    <div class="row my-2">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/swi_OUnpEoc?si=KGbmXC_jL1DmWxfS"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 <?php } ?>
 

@@ -62,20 +62,18 @@ $table = getTable($connection);
             </div>
 
             <div class="card-footer text-center py-3">
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <div class="d-flex justify-content-evenly gap-3 flex-wrap">
                     <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle" style="width:15px; height:15px;"></span>
-                        <small>Champions League</small>
+                        <span class="badge rounded-circle text-dark" style="width:15px; height:15px;">Champions
+                            League</span>
                     </div>
                     <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle"
-                            style="width:15px; height:15px; background-color:#cfe2ff;"></span>
-                        <small>Europa League / Conference League</small>
+                        <span class="badge rounded-circle text-dark"
+                            style="width:15px; height:15px; background-color:#cfe2ff;">Europa League</span>
                     </div>
                     <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle"
-                            style="width:15px; height:15px; background-color:#f8d7da;"></span>
-                        <small>Relegation</small>
+                        <span class="badge rounded-circle text-dark"
+                            style="width:15px; height:15px; background-color:#f8d7da;">Relegation</span>
                     </div>
                 </div>
             </div>
