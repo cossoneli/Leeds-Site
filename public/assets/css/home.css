@@ -131,3 +131,37 @@
 .vote-count:hover {
   cursor: pointer;
 } 
+
+/* Badges for table legend */
+.badge-square-champions {
+  width: 15px;
+  height: 15px;
+  background-color: green;
+  border: 1px solid #333;   /* subtle border */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;         /* space from text */
+  box-sizing: border-box;    /* include border in size */
+}
+
+.badge-square-europa {
+  width: 15px;
+  height: 15px;
+  background-color: #cfe2ff;
+  border: 1px solid #333;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  box-sizing: border-box;
+}
+
+.badge-square-relegation {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border: 1px solid #333;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  box-sizing: border-box;
+}

@@ -48,8 +48,7 @@ $table = getTable($connection);
                     <div class="row align-items-center py-2 border-bottom hover-shadow-sm <?php echo $borderClass; ?>">
                         <div class="col-1 text-center fw-bold text-muted"><?php echo $team['position']; ?></div>
                         <div class="col-3 d-flex align-items-center gap-2">
-                            <img src="<?php echo $team['crest']; ?>" alt="" class="rounded-circle border"
-                                style="width:24px; height:24px;">
+                            <img src="<?php echo $team['crest']; ?>" alt="" style="width:24px; height:24px;">
                             <span class="fw-semibold"><?php echo $team['abr']; ?></span>
                         </div>
                         <div class="col-1 text-center"><?php echo $team['wins']; ?></div>
@@ -62,18 +61,18 @@ $table = getTable($connection);
             </div>
 
             <div class="card-footer text-center py-3">
-                <div class="d-flex justify-content-evenly gap-3 flex-wrap">
-                    <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle text-dark" style="width:15px; height:15px;">Champions
-                            League</span>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <div class="d-flex align-items-center">
+                        <span class="badge-square-champions"></span>
+                        <span>Champions League</span>
                     </div>
-                    <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle text-dark"
-                            style="width:15px; height:15px; background-color:#cfe2ff;">Europa League</span>
+                    <div class="d-flex align-items-center">
+                        <span class="badge-square-europa"></span>
+                        <span>Europa League</span>
                     </div>
-                    <div class="d-flex align-items-center gap-1">
-                        <span class="badge rounded-circle text-dark"
-                            style="width:15px; height:15px; background-color:#f8d7da;">Relegation</span>
+                    <div class="d-flex align-items-center">
+                        <span class="badge-square-relegation"></span>
+                        <span>Relegation</span>
                     </div>
                 </div>
             </div>

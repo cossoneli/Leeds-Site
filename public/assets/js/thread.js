@@ -22,14 +22,14 @@ $(document).ready(() => {
         const parentId = commentDiv.data('parent-comment');
         
         // Avoid adding multiple reply forms
-        if (commentDiv.find('.reply-form').length === 0) {
+        if (parentDiv.find('.reply-form').length === 0) {
             const replyForm = `
                 <form class="reply-form" action="" method="POST">
                     <div class="d-flex my-3">
                         <div class="comment-body flex-grow-1">
-                            <textarea class="form-control mb-2" placeholder="Write your reply..."></textarea>
+                            <textarea id="comment" name="comment" class="form-control mb-2" placeholder="Write your reply..."></textarea>
                             <div class="text-end">
-                                <button class="btn btn-primary btn-sm submit-reply">Reply</button>
+                                <button type="submit" class="btn btn-primary btn-sm submit-reply">Reply</button>
                                 <button class="btn btn-secondary btn-sm cancel-reply">Cancel</button>
                             </div>
                         </div>

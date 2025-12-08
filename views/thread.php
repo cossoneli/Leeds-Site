@@ -68,6 +68,10 @@ $query = "SELECT * FROM `thread_comments` WHERE thread_id = $thread_id ORDER BY 
 
 $result = mysqli_query($connection, $query);
 
+echo "<pre>";
+print_r(mysqli_fetch_assoc($result));
+echo "</pre>";
+
 if (!$result)
     die(mysqli_error($connection));
 
