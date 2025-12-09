@@ -50,9 +50,28 @@ if ($_SERVER['HTTP_HOST'] === 'localhost') {
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $baseUrl ?>?page=groups">Groups</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="dropdown"
+                            role="button" aria-expanded="false">Threads</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="<?= $baseUrl ?>?page=thread&thread=Live Table" class="dropdown-item">Live
+                                    Table</a>
+                            </li>
+                            <li><a href="<?= $baseUrl ?>?page=thread&thread=Next Fixture" class="dropdown-item">Next
+                                    Fixture</a>
+                            </li>
+                            <li><a href="<?= $baseUrl ?>?page=thread&thread=Previous Fixture"
+                                    class="dropdown-item">Previous
+                                    Result</a></li>
+                        </ul>
+                    </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $baseUrl ?>?page=faq">FAQ</a>
                     </li>
+
                 </ul>
 
                 <ul class="navbar-nav ms-auto">

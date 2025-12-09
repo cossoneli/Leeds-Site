@@ -64,18 +64,16 @@ switch ($topic) {
 $_SESSION['topic'] = $topic;
 $_SESSION['thread_id'] = $thread_id;
 
-$query = "SELECT * FROM `thread_comments` WHERE thread_id = $thread_id ORDER BY created_at DESC";
+$comments = getComments($connection, $thread_id);
 
-$result = mysqli_query($connection, $query);
+// echo "<pre>";
+// while ($row = mysqli_fetch_assoc($comments)) {
+//     print_r($row);
+// }
+// echo "</pre>";
 
-echo "<pre>";
-print_r(mysqli_fetch_assoc($result));
-echo "</pre>";
+?>
 
-if (!$result)
-    die(mysqli_error($connection));
-
-// ?>
 <div class="bg-light text-dark py-4 mb-4 border-bottom shadow-sm">
     <div class="container text-center">
         <h2 class="mb-1 fw-semibold"><?php echo htmlspecialchars($topic); ?></h2>
@@ -123,46 +121,87 @@ if (!$result)
             <div class="comments-panel p-3">
                 <h5 class="mb-3">Comments</h5>
                 <?php
-                if (mysqli_num_rows($result) === 0) { ?>
+                $organized = [];
+                $replies = [];
+
+                // First pass: separate parents and replies
+                while ($row = mysqli_fetch_assoc($comments)) {
+                    if (is_null($row['parent_comment_id'])) {
+                        // Parent comment
+                        $organized[$row['comment_id']] = $row;
+                        $organized[$row['comment_id']]['replies'] = [];
+                    } else {
+                        // Reply
+                        $replies[] = $row;
+                    }
+                }
+
+                // Second pass: attach replies to their parents
+                foreach ($replies as $reply) {
+                    $parentId = $reply['parent_comment_id'];
+                    if (isset($organized[$parentId])) {
+                        $organized[$parentId]['replies'][] = $reply;
+                    }
+                }
+
+                if (empty($organized)) { ?>
+
                     <div class="text-muted small">No comments yet — be the first to post.</div>
+
                 <?php } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $username = htmlspecialchars($row['username']);
-                        $text = nl2br(htmlspecialchars($row['text']));
-                        // formatCommentTime echoes formatted time directly
-                        $votes = (int) $row['votes'];
-                        ?>
-                        <div class="comment-panel d-flex flex-column">
-                            <div class="comment d-flex mb-3" data-parent-comment="<?php echo $row['id'] ?>">
-                                <div class="comment-avatar me-3">
-                                    <?php // simple initials avatar ?>
-                                    <div class="avatar-circle"><?php echo strtoupper(substr($username, 0, 1)); ?></div>
+
+                    foreach ($organized as $parent) {
+                        showComment($parent, false);    // parent
+                        foreach ($parent['replies'] as $reply) {
+                            showComment($reply, true);  // each reply
+                        }
+                    }
+                }
+
+                function showComment($row, $isChild = false)
+                {
+                    $username = htmlspecialchars($row['username']);
+                    $text = nl2br(htmlspecialchars($row['comment_text']));
+                    $votes = (int) $row['votes'];
+                    $padding = $isChild ? 'ms-5' : ''; // indent replies
+                    ?>
+
+                    <div class="comment-panel d-flex flex-column <?php echo $padding; ?>">
+                        <div class="comment d-flex mb-3" data-parent-comment="<?php echo $row['comment_id'] ?>">
+                            <div class="comment-avatar me-3">
+                                <div class="avatar-circle"><?php echo strtoupper(substr($username, 0, 1)); ?></div>
+                            </div>
+
+                            <div class="comment-body flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <strong class="username"><?php echo $username; ?></strong>
+                                        <span
+                                            class="ms-2 text-muted small"><?php formatCommentTime($row['created_at']); ?></span>
+                                    </div>
+
+                                    <!-- <div class="text-end">
+                                        <button class="vote-count small bg-light border rounded p-1 text-muted"
+                                            data-id="<?php echo $row['comment_id'] ?>">
+                                            👍 <?php echo $votes; ?>
+                                        </button>
+                                    </div> -->
                                 </div>
-                                <div class="comment-body flex-grow-1">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <strong class="username"><?php echo $username; ?></strong>
-                                            <span
-                                                class="ms-2 text-muted small"><?php formatCommentTime($row['created_at']); ?></span>
-                                        </div>
-                                        <div class="text-end">
-                                            <button data-id="<?php echo $row['id'] ?>"
-                                                class="vote-count small bg-light border rounded p-1 text-muted">👍
-                                                <?php echo $votes; ?>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="comment-text mt-2 text-dark">
-                                        <?php echo $text; ?>
-                                    </div>
-                                    <div class="comment-actions mt-2 small">
+
+                                <div class="comment-text mt-2 text-dark"><?php echo $text; ?></div>
+
+                                <div class="comment-actions mt-2 small">
+                                    <?php if (!$isChild) { ?>
                                         <span class="reply-button me-3 text-primary text-decoration-none">Reply</span>
-                                    </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
-                    <?php }
-                } ?>
+                    </div>
+
+                    <?php
+                }
+                ?>
             </div>
         </div>
 
@@ -219,11 +258,15 @@ if (!$result)
                             <?php echo "Matchday " . $nextLeedsFixture['matchday'] ?>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-between mx-1">
+                    <div class="row d-flex justify-content-between mx-1 mb-3">
                         <img style="width: 120px;" src="<?php echo $nextLeedsFixture['home_crest'] ?>" alt="">
                         <img style="width: 120px;" src="https://crests.football-data.org/PL.png" alt="">
                         <img style="width: 120px;" src="<?php echo $nextLeedsFixture['away_crest'] ?>" alt="">
                     </div>
+                    <iframe width="520" height="300" src="https://www.youtube.com/embed/SU_uLR5oM7U?si=S3QaX6v3aMY92ymR"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <?php } ?>
 
                 <!-- ----------------------------------- PREVIOUS FIXTURE -->

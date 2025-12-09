@@ -22,5 +22,19 @@ $stmt = $connection->prepare("INSERT INTO thread_comments (thread_id, username, 
 $stmt->bind_param("issi", $thread_id, $username, $comment, $parent_comment_id);
 $stmt->execute();
 
-header("Location: $baseUrl/index.php?page=home");
+switch ($thread_id) {
+    case 1:
+        header("Location: $baseUrl/index.php?page=thread&topic=Live Table");
+        break;
+    case 2:
+        header("Location: $baseUrl/index.php?page=thread&topic=Next Fixture");
+        break;
+    case 3:
+        header("Location: $baseUrl/index.php?page=thread&topic=Previous Fixture");
+        break;
+    default:
+        header("Location: $baseUrl/index.php?page=home");
+        break;
+}
+
 exit();

@@ -8,6 +8,15 @@ $viewPath = dirname(__DIR__) . '/views/';
 $controllerPath = dirname(__DIR__) . '/controllers/';
 $helperPath = dirname(__DIR__) . '/helpers/';
 
+// Special case for thread pages where we need query parameters
+
+if ($page === 'thread' && isset($_GET['thread'])) {
+    $threadPage = $_GET['thread'];
+    $_GET['topic'] = $threadPage;
+    require $viewPath . 'thread.php';
+    exit;
+}
+
 switch ($page) {
     case 'home':
         require $viewPath . 'home.php';
